@@ -21,14 +21,7 @@ import { site, whatsappPrefill } from "../data/site.ts";
   <section class="section">
     <div class="container contact">
       <!-- Form -->
-      <form
-        class="contact__form"
-        action="https://api.web3forms.com/submit"
-        method="POST"
-      >
-        <input type="hidden" name="access_key" value={site.web3formsKey} />
-        <input type="hidden" name="subject" value="Nueva consulta desde el sitio web" />
-        <input type="hidden" name="from_name" value="Sitio Iván Bazaldúa" />
+      <form class="contact__form" id="contact-form" novalidate>
         <!-- Honeypot anti-spam -->
         <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" />
 
@@ -63,8 +56,8 @@ import { site, whatsappPrefill } from "../data/site.ts";
             placeholder="Cuéntame qué necesitas resolver y dónde se ubica tu proyecto."></textarea>
         </div>
 
-        <button type="submit" class="contact__submit">Enviar consulta</button>
-        <p class="contact__note" role="status">
+        <button type="submit" class="contact__submit" id="submit-btn">Enviar consulta</button>
+        <p class="contact__note" id="form-status" role="status">
           Te responderé lo antes posible para platicar tu proyecto.
         </p>
       </form>
@@ -238,5 +231,45 @@ import { site, whatsappPrefill } from "../data/site.ts";
     link.href = `mailto:${addr}`;
     const value = link.querySelector(".channel__value");
     if (value) value.textContent = addr;
+  }
+
+  // Form submission via fetch to Cloudflare Worker / Resend
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const submitBtn = document.querySelector<HTMLButtonElement>("#submit-btn");
+  const statusEl = document.querySelector<HTMLParagraphElement>("#form-status");
+
+  if (form && submitBtn && statusEl) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando…";
+      statusEl.textContent = "";
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          form.reset();
+          statusEl.textContent = "¡Mensaje enviado! Te responderé pronto.";
+          statusEl.style.color = "var(--color-success, #2e7d32)";
+        } else {
+          throw new Error(data.error ?? "Error desconocido");
+        }
+      } catch (err) {
+        statusEl.textContent = `Error: ${err instanceof Error ? err.message : "No se pudo enviar. Intenta por WhatsApp."}`;
+        statusEl.style.color = "var(--color-error, #c62828)";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar consulta";
+      }
+    });
   }
 </script>

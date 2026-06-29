@@ -1,0 +1,14 @@
+name = "ibazaldua-contact"
+main = "src/pages/api/contact.ts"
+compatibility_date = "2024-01-01"
+
+# Uncomment and fill to deploy as a standalone Worker (not tied to Pages)
+# routes = [{ pattern = "api.ibazaldua.com", zone_name = "ibazaldua.com" }]
+
+# Bind KV for rate limiting (optional, add when needed)
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+[vars]
+# Exposed to the worker via env, not stored here

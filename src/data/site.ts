@@ -17,8 +17,6 @@ export const site = {
     // Pretty format for display.
     phoneDisplay: "+52 821 102 1129",
   },
-  // Web3Forms access key — replace with your real key from web3forms.com.
-  web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY",
 } as const;
 
 export const navLinks = [
