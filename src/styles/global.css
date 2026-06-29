@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Global styles — reset, base typography, shared utilities
+   Imports design tokens and self-hosted fonts (Fontsource).
+   ========================================================================== */
+
+@import "./tokens.css";
+
+/* Self-hosted fonts via Fontsource (no Google CDN).
+   Only latin + latin-ext subsets are loaded — the site is in Spanish, so
+   cyrillic/greek/hebrew/vietnamese/etc. subsets are intentionally excluded. */
+@import "@fontsource/oswald/latin-400.css";
+@import "@fontsource/oswald/latin-600.css";
+@import "@fontsource/oswald/latin-700.css";
+@import "@fontsource/oswald/latin-ext-400.css";
+@import "@fontsource/oswald/latin-ext-600.css";
+@import "@fontsource/oswald/latin-ext-700.css";
+@import "@fontsource/open-sans/latin-300.css";
+@import "@fontsource/open-sans/latin-400.css";
+@import "@fontsource/open-sans/latin-600.css";
+@import "@fontsource/open-sans/latin-ext-300.css";
+@import "@fontsource/open-sans/latin-ext-400.css";
+@import "@fontsource/open-sans/latin-ext-600.css";
+
+/* ----- Modern reset ----- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-body-light);
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* ----- Headings ----- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading-bold);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--text-h1);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+h2 {
+  font-size: var(--text-h2);
+}
+
+h3 {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-heading-semibold);
+}
+
+p {
+  max-width: 65ch;
+}
+
+/* ----- Accessibility helpers ----- */
+:focus-visible {
+  outline: 3px solid var(--color-electric);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-4);
+  z-index: 1000;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-charcoal);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ----- Layout utilities ----- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  padding-block: var(--space-24);
+}
+
+.section--soft {
+  background-color: var(--color-bg-soft);
+}
+
+.section--dark {
+  background-color: var(--color-charcoal);
+  color: var(--text-on-dark);
+}
+
+.section--dark h2,
+.section--dark h3 {
+  color: var(--color-white);
+}
+
+.section__header {
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+  margin-bottom: var(--space-12);
+}
+
+.section__header p {
+  max-width: none;
+  margin-top: var(--space-4);
+  color: var(--text-secondary);
+}
+
+.section--dark .section__header p {
+  color: var(--color-grey-light);
+}
+
+/* Accent text — only on large/heading text (a11y contrast rule). */
+.text-accent {
+  color: var(--color-electric);
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--text-small);
+  color: var(--color-electric-dark);
+}
+
+/* Brand seismic-wave divider between sections. */
+.wave-divider {
+  height: 3px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-electric) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* Reduced motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

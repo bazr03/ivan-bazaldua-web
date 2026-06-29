@@ -1,0 +1,81 @@
+---
+/**
+ * Service card — presents one service in the client's language:
+ * what it solves, who it's for, and what is delivered.
+ */
+interface Props {
+  name: string;
+  methods?: string;
+  solves: string;
+  forWhom: string;
+  delivers: string;
+}
+const { name, methods, solves, forWhom, delivers } = Astro.props;
+---
+
+<article class="card">
+  <header class="card__head">
+    <h3 class="card__title">{name}</h3>
+    {methods && <p class="card__methods">{methods}</p>}
+  </header>
+  <dl class="card__body">
+    <div class="card__row">
+      <dt>Qué resuelve</dt>
+      <dd>{solves}</dd>
+    </div>
+    <div class="card__row">
+      <dt>Para quién</dt>
+      <dd>{forWhom}</dd>
+    </div>
+    <div class="card__row">
+      <dt>Entregable</dt>
+      <dd>{delivers}</dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-grey-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-sm);
+    border-top: 4px solid var(--color-electric);
+    transition:
+      transform var(--transition-base),
+      box-shadow var(--transition-base);
+    height: 100%;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .card__title {
+    color: var(--color-charcoal);
+  }
+  .card__methods {
+    margin-top: var(--space-2);
+    font-family: var(--font-heading);
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+    color: var(--color-electric-dark);
+  }
+  .card__body {
+    margin-top: var(--space-6);
+    display: grid;
+    gap: var(--space-4);
+  }
+  .card__row dt {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    text-transform: uppercase;
+    font-size: var(--text-caption);
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-1);
+  }
+  .card__row dd {
+    color: var(--text-primary);
+  }
+</style>

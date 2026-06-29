@@ -1,0 +1,124 @@
+---
+/**
+ * Site footer — brand, quick nav, and contact. Email is rendered via JS
+ * to reduce scraping by spam bots (progressive enhancement).
+ */
+import { site, navLinks, whatsappLink } from "../data/site.ts";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <p class="footer__name">Iván Bazaldúa</p>
+      <p class="footer__role">M.C. Geofísica Aplicada</p>
+      <p class="footer__tag">
+        Soluciones especializadas en geología, geofísica y geotecnia.
+      </p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Navegación del pie">
+      <h2 class="footer__heading">Navegación</h2>
+      <ul>
+        {navLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        <li><a href="/contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer__contact">
+      <h2 class="footer__heading">Contacto</h2>
+      <p>
+        <a
+          class="footer__email"
+          data-user="icesarbr"
+          data-domain="gmail.com"
+          href="#"
+        >Correo electrónico</a>
+      </p>
+      <p>
+        <a href={whatsappLink} target="_blank" rel="noopener">
+          WhatsApp: {site.contact.phoneDisplay}
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container">
+      <p>&copy; {year} Iván Bazaldúa. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-charcoal);
+    color: var(--color-grey-light);
+    font-size: var(--text-small);
+  }
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-12);
+    padding-block: var(--space-16);
+  }
+  .footer__name {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-bold);
+    font-size: 1.25rem;
+    color: var(--color-white);
+    text-transform: uppercase;
+  }
+  .footer__role {
+    color: var(--color-electric);
+    font-weight: var(--weight-body);
+    margin-bottom: var(--space-3);
+  }
+  .footer__tag {
+    color: var(--color-grey);
+    max-width: 40ch;
+  }
+  .footer__heading {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-white);
+    margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .footer__nav a,
+  .footer__contact a {
+    color: var(--color-grey-light);
+    transition: color var(--transition-fast);
+    display: inline-block;
+    padding-block: var(--space-1);
+  }
+  .footer__nav a:hover,
+  .footer__contact a:hover {
+    color: var(--color-electric);
+  }
+  .footer__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-block: var(--space-6);
+    text-align: center;
+    color: var(--color-grey);
+  }
+  @media (max-width: 720px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+</style>
+
+<script>
+  // Assemble the mailto link client-side so the raw address isn't in the HTML.
+  const link = document.querySelector<HTMLAnchorElement>(".footer__email");
+  if (link) {
+    const user = link.dataset.user;
+    const domain = link.dataset.domain;
+    const addr = `${user}@${domain}`;
+    link.href = `mailto:${addr}`;
+    link.textContent = addr;
+  }
+</script>

@@ -1,0 +1,253 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+
+const groups = [
+  {
+    title: "Caracterización del subsuelo",
+    intro:
+      "Para obra civil, geotecnia y estudios de agua. Saber qué hay bajo el suelo antes de construir, perforar o invertir.",
+    services: [
+      {
+        name: "Tomografía de Resistividad Eléctrica (TRE)",
+        methods: "Método eléctrico",
+        solves:
+          "Define la estructura del subsuelo e identifica el nivel freático, cavidades, zonas de humedad, suelos blandos y la profundidad de roca o suelo firme.",
+        forWhom:
+          "Proyectos de obra civil y geotecnia que necesitan caracterizar el terreno antes de cimentar, y estudios de agua subterránea.",
+        delivers:
+          "Perfiles 2D de resistividad, mapas de zonas relevantes, interpretación y recomendaciones.",
+      },
+      {
+        name: "Tomografía de Refracción Sísmica (TRS)",
+        methods: "Método sísmico",
+        solves:
+          "Determina la profundidad y velocidad de las capas del subsuelo, ubicando el contacto suelo-roca y la rigidez del terreno.",
+        forWhom:
+          "Estudios geotécnicos para cimentaciones, excavaciones y obras de infraestructura.",
+        delivers:
+          "Perfiles sísmicos de velocidad, modelo de capas, interpretación y recomendaciones.",
+      },
+      {
+        name: "Análisis Multicanal de Ondas Superficiales (MASW)",
+        methods: "Método sísmico",
+        solves:
+          "Obtiene el perfil de velocidad de ondas de corte (Vs) del terreno, clave para clasificar el suelo y evaluar su respuesta sísmica.",
+        forWhom: "Diseño geotécnico y sísmico de edificaciones e infraestructura.",
+        delivers:
+          "Perfil Vs del subsuelo, clasificación del terreno, interpretación y recomendaciones.",
+      },
+    ],
+  },
+  {
+    title: "Exploración minera y prospección de agua",
+    intro:
+      "Localizar recursos bajo tierra y reducir el riesgo de perforaciones a ciegas.",
+    services: [
+      {
+        name: "Tomografía Eléctrica + Potencial Inducido (TRE–IP)",
+        methods: "Métodos eléctricos",
+        solves:
+          "La combinación TRE–IP detecta contrastes en el subsuelo asociados a cuerpos mineralizados y a la presencia de agua, orientando dónde explorar o perforar.",
+        forWhom:
+          "Exploración minera y prospección de agua subterránea que buscan invertir las perforaciones donde realmente cuentan.",
+        delivers:
+          "Secciones de resistividad y cargabilidad (IP), mapas de zonas de interés, interpretación y recomendaciones de exploración.",
+      },
+    ],
+  },
+  {
+    title: "Servicios especializados",
+    intro:
+      "Soluciones puntuales para detección de instalaciones y diseño eléctrico seguro.",
+    services: [
+      {
+        name: "Georradar (GPR) — Detección de instalaciones",
+        methods: "Método electromagnético",
+        solves:
+          "Mapea tuberías, cableados y otras instalaciones enterradas sin necesidad de excavar.",
+        forWhom:
+          "Obra civil, mantenimiento de infraestructura y proyectos que necesitan ubicar servicios subterráneos antes de intervenir.",
+        delivers:
+          "Mapa de ubicación de instalaciones detectadas, profundidades estimadas e informe.",
+      },
+      {
+        name: "Tierras Físicas — Resistividad de suelos",
+        methods: "Método eléctrico",
+        solves:
+          "Mide la resistividad del subsuelo, dato indispensable para el diseño del sistema de puesta a tierra en instalaciones eléctricas.",
+        forWhom:
+          "Diseño de subestaciones eléctricas e instalaciones que requieren un sistema de tierras confiable y seguro.",
+        delivers:
+          "Valores de resistividad del terreno, perfiles e informe para diseño de puesta a tierra.",
+      },
+    ],
+  },
+];
+
+const included = [
+  { label: "Metodología aplicada", text: "Explicación clara del método y por qué es el adecuado para tu objetivo." },
+  { label: "Resultados de datos", text: "Mediciones procesadas y presentadas de forma comprensible." },
+  { label: "Mapas y perfiles", text: "Ubicación de las zonas de relevancia detectadas." },
+  { label: "Interpretación", text: "Qué significan los resultados para tu proyecto." },
+  { label: "Recomendaciones", text: "Pasos a seguir según el objetivo del estudio." },
+];
+
+const software = [
+  "Res2DInv", "ZondST2D", "SeisImager", "EasyMASW",
+  "ResIPy", "Surfer", "QGIS", "AutoCAD",
+];
+---
+
+<Layout
+  title="Servicios de Geofísica Aplicada — Iván Bazaldúa"
+  description="Tomografía eléctrica (TRE), refracción sísmica (TRS), MASW, potencial inducido (IP), georradar y tierras físicas para obra civil, minería y agua subterránea."
+>
+  <section class="section--soft page-head">
+    <div class="container">
+      <p class="eyebrow">Servicios</p>
+      <h1>Geofísica aplicada</h1>
+      <p class="page-head__lead">
+        Estudios del subsuelo con métodos no invasivos para tomar decisiones
+        con datos, no con suposiciones. Cada estudio termina en un informe
+        técnico claro, con resultados, interpretación y recomendaciones según
+        tu objetivo.
+      </p>
+    </div>
+  </section>
+
+  {
+    groups.map((group) => (
+      <section class="section">
+        <div class="container">
+          <div class="group-head">
+            <h2>{group.title}</h2>
+            <p>{group.intro}</p>
+          </div>
+          <div class="service-grid">
+            {group.services.map((s) => (
+              <ServiceCard
+                name={s.name}
+                methods={s.methods}
+                solves={s.solves}
+                forWhom={s.forWhom}
+                delivers={s.delivers}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <hr class="wave-divider" />
+
+  <!-- What every study includes -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Qué incluye cada estudio</p>
+        <h2>Un informe que puedes usar para decidir</h2>
+      </div>
+      <ul class="included">
+        {
+          included.map((i) => (
+            <li class="included__item">
+              <span class="included__bullet" aria-hidden="true"></span>
+              <div>
+                <h3>{i.label}</h3>
+                <p>{i.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Tech / software -->
+  <section class="section">
+    <div class="container section__header">
+      <p class="eyebrow">Tecnología y software</p>
+      <h2>Procesamiento e interpretación especializados</h2>
+      <ul class="software">
+        {software.map((s) => <li class="software__badge">{s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBanner
+    heading="¿No estás seguro de qué estudio necesitas?"
+    text="Cuéntame tu proyecto y te recomiendo el método adecuado para tu objetivo."
+  />
+</Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-24) var(--space-16);
+  }
+  .page-head__lead {
+    max-width: 60ch;
+    margin-top: var(--space-4);
+    font-size: 1.125rem;
+    color: var(--text-primary);
+  }
+  .group-head {
+    margin-bottom: var(--space-8);
+  }
+  .group-head p {
+    margin-top: var(--space-3);
+    color: var(--text-secondary);
+    max-width: 70ch;
+  }
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-6);
+  }
+  .included {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-8);
+    max-width: 960px;
+    margin-inline: auto;
+  }
+  .included__item {
+    display: flex;
+    gap: var(--space-4);
+  }
+  .included__bullet {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    margin-top: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-electric);
+  }
+  .included__item h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-1);
+  }
+  .included__item p {
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+  }
+  .software {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-top: var(--space-8);
+  }
+  .software__badge {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    font-size: var(--text-small);
+    letter-spacing: 0.03em;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-charcoal);
+    color: var(--color-white);
+    border-radius: var(--radius-sm);
+  }
+</style>

@@ -1,0 +1,168 @@
+---
+/**
+ * Base layout — handles <head> SEO, fonts, global styles, and the shared
+ * Nav / Footer / WhatsApp chrome. Every page wraps its content here.
+ */
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import { site } from "../data/site.ts";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Path-relative canonical, e.g. "/servicios". Defaults to current URL. */
+  ogType?: string;
+  /** Robots meta value, e.g. "index, follow". Defaults to "index, follow". */
+  robots?: string;
+}
+const { title, description = site.description, ogType = "website", robots = "index, follow" } = Astro.props;
+
+const pageTitle = title;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL("/og-image.jpg", site.url).href;
+
+// EEAT-oriented structured data: a real expert + the service offered.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "Iván Bazaldúa — Geofísica Aplicada",
+      url: site.url,
+      logo: new URL("/favicon.svg", site.url).href,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: site.contact.phoneDisplay,
+        email: site.contact.email,
+        contactType: "customer service",
+        availableLanguage: "Spanish",
+        areaServed: "MX",
+      },
+      sameAs: [],
+    },
+    {
+      "@type": "Person",
+      name: "Iván Bazaldúa",
+      jobTitle: "M.C. Geofísica Aplicada",
+      url: site.url,
+      email: `mailto:${site.contact.email}`,
+      telephone: site.contact.phoneDisplay,
+      knowsAbout: [
+        "Geofísica aplicada",
+        "Tomografía de resistividad eléctrica",
+        "Tomografía de refracción sísmica",
+        "MASW",
+        "Georradar",
+        "Geotecnia",
+        "Exploración minera",
+        "Prospección de agua subterránea",
+      ],
+      alumniOf: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: "CICESE — Centro de Investigación Científica y de Educación Superior de Ensenada",
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universidad Autónoma de Nuevo León (UANL)",
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      name: "Iván Bazaldúa — Geofísica Aplicada",
+      description: site.description,
+      url: site.url,
+      telephone: site.contact.phoneDisplay,
+      email: `mailto:${site.contact.email}`,
+      areaServed: "MX",
+      serviceType: [
+        "Estudios geofísicos",
+        "Geotecnia",
+        "Exploración minera",
+        "Prospección de agua",
+      ],
+    },
+  ],
+};
+
+// Breadcrumb for subpages
+const pathname = Astro.url.pathname;
+const showBreadcrumb = pathname !== "/";
+const breadcrumbItems = [
+  { name: "Inicio", item: site.url },
+  ...(pathname !== "/"
+    ? [{ name: pageTitle, item: canonical }]
+    : []),
+];
+const breadcrumbJsonLd = showBreadcrumb
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbItems.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: item.item,
+      })),
+    }
+  : null;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- hreflang — same site, single language -->
+    <link rel="alternate" hreflang="es-MX" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+
+    <!-- PWA / mobile -->
+    <meta name="theme-color" content="#00a8cc" />
+    <!-- apple-touch-icon: genera un ./apple-touch-icon.png real para producción -->
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="Iván Bazaldúa" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(
+        breadcrumbJsonLd
+          ? { ...jsonLd, "@graph": [...jsonLd["@graph"], breadcrumbJsonLd] }
+          : jsonLd,
+      )}
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+  </body>
+</html>

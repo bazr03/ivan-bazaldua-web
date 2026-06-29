@@ -1,0 +1,89 @@
+---
+/**
+ * Brand logomark — angle brackets framing a seismic wave + globe motif.
+ * Recreated as inline SVG so it stays crisp at any size and inherits color.
+ */
+interface Props {
+  size?: number;
+  withText?: boolean;
+  class?: string;
+}
+const { size = 44, withText = true, class: className = "" } = Astro.props;
+---
+
+<span class={`logo ${className}`}>
+  <svg
+    class="logo__mark"
+    width={size}
+    height={size}
+    viewBox="0 0 100 100"
+    role="img"
+    aria-label="Iván Bazaldúa"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Left bracket -->
+    <path
+      d="M30 18 L14 50 L30 82"
+      stroke="var(--color-charcoal)"
+      stroke-width="9"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+    <!-- Right bracket -->
+    <path
+      d="M70 18 L86 50 L70 82"
+      stroke="var(--color-charcoal)"
+      stroke-width="9"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+    <!-- Globe -->
+    <circle cx="50" cy="50" r="14" fill="var(--color-grey-light)" opacity="0.5" />
+    <!-- Seismic wave -->
+    <path
+      d="M26 50 L31 50 L34 38 L38 64 L42 44 L46 56 L50 50 L54 44 L58 60 L62 40 L66 50 L74 50"
+      stroke="var(--color-electric)"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+  {
+    withText && (
+      <span class="logo__text">
+        <span class="logo__name">Iván Bazaldúa</span>
+        <span class="logo__role">M.C. Geofísica Aplicada</span>
+      </span>
+    )
+  }
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .logo__mark {
+    flex-shrink: 0;
+  }
+  .logo__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .logo__name {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-bold);
+    font-size: 1.125rem;
+    color: var(--color-charcoal);
+  }
+  .logo__role {
+    font-family: var(--font-body);
+    font-weight: var(--weight-body-light);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+  }
+</style>

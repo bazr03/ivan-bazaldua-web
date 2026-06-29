@@ -1,0 +1,63 @@
+---
+/**
+ * Final call-to-action banner — charcoal strip with seismic-wave accent.
+ * Reused at the bottom of most pages to drive contact conversions.
+ */
+import Button from "./Button.astro";
+
+interface Props {
+  heading: string;
+  text?: string;
+  buttonLabel?: string;
+}
+const {
+  heading,
+  text = "Cuéntame tu objetivo y te propongo el estudio adecuado.",
+  buttonLabel = "Contáctame",
+} = Astro.props;
+---
+
+<section class="cta section--dark">
+  <div class="container cta__inner">
+    <div>
+      <h2 class="cta__heading">{heading}</h2>
+      <p class="cta__text">{text}</p>
+    </div>
+    <Button href="/contacto" variant="ghost">{buttonLabel}</Button>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-16);
+  }
+  .cta::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-electric),
+      transparent
+    );
+  }
+  .cta__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+  }
+  .cta__heading {
+    color: var(--color-white);
+    max-width: 22ch;
+  }
+  .cta__text {
+    color: var(--color-grey-light);
+    margin-top: var(--space-3);
+  }
+</style>

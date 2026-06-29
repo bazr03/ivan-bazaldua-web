@@ -1,0 +1,242 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site, whatsappPrefill } from "../data/site.ts";
+---
+
+<Layout
+  title="Contacto — Iván Bazaldúa, Geofísica Aplicada"
+  description="Cuéntame tu proyecto y te propongo el estudio geofísico adecuado. Contacto por formulario, correo o WhatsApp."
+>
+  <section class="section--soft page-head">
+    <div class="container">
+      <p class="eyebrow">Contacto</p>
+      <h1>Contacto</h1>
+      <p class="page-head__lead">
+        Cuéntame tu proyecto y te propongo el estudio geofísico adecuado para
+        tu objetivo.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact">
+      <!-- Form -->
+      <form
+        class="contact__form"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+      >
+        <input type="hidden" name="access_key" value={site.web3formsKey} />
+        <input type="hidden" name="subject" value="Nueva consulta desde el sitio web" />
+        <input type="hidden" name="from_name" value="Sitio Iván Bazaldúa" />
+        <!-- Honeypot anti-spam -->
+        <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" />
+
+        <div class="field">
+          <label for="name">Nombre <span aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" required autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="email">Correo electrónico <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="phone">Teléfono <span class="optional">(opcional)</span></label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+
+        <div class="field">
+          <label for="sector">Tipo de proyecto</label>
+          <select id="sector" name="sector">
+            <option value="Obra civil">Obra civil / geotecnia</option>
+            <option value="Minería">Minería</option>
+            <option value="Agua subterránea">Agua subterránea</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Mensaje <span aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="5" required
+            placeholder="Cuéntame qué necesitas resolver y dónde se ubica tu proyecto."></textarea>
+        </div>
+
+        <button type="submit" class="contact__submit">Enviar consulta</button>
+        <p class="contact__note" role="status">
+          Te responderé lo antes posible para platicar tu proyecto.
+        </p>
+      </form>
+
+      <!-- Direct channels -->
+      <aside class="contact__direct">
+        <h2>Contacto directo</h2>
+        <p class="contact__direct-intro">
+          ¿Prefieres escribir directo? Estos son mis canales.
+        </p>
+
+        <a class="channel" id="email-channel" data-user="icesarbr" data-domain="gmail.com" href="#">
+          <span class="channel__icon" aria-hidden="true">✉</span>
+          <span>
+            <span class="channel__label">Correo</span>
+            <span class="channel__value">Cargando…</span>
+          </span>
+        </a>
+
+        <a class="channel" href={whatsappPrefill} target="_blank" rel="noopener">
+          <span class="channel__icon" aria-hidden="true">●</span>
+          <span>
+            <span class="channel__label">WhatsApp</span>
+            <span class="channel__value">{site.contact.phoneDisplay}</span>
+          </span>
+        </a>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-24) var(--space-16);
+  }
+  .page-head__lead {
+    max-width: 56ch;
+    margin-top: var(--space-4);
+    font-size: 1.125rem;
+  }
+  .contact {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+  .field {
+    margin-bottom: var(--space-6);
+  }
+  .field label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-2);
+  }
+  .field label span[aria-hidden] {
+    color: var(--color-electric-dark);
+  }
+  .optional {
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-secondary);
+    font-weight: var(--weight-body);
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-grey-light);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    font-family: var(--font-body);
+    transition: border-color var(--transition-fast);
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--color-electric);
+    outline: none;
+  }
+  .field textarea {
+    resize: vertical;
+  }
+  .contact__submit {
+    width: 100%;
+    padding: var(--space-4);
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-charcoal);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+  }
+  .contact__submit:hover {
+    background: #000;
+  }
+  .contact__note {
+    margin-top: var(--space-4);
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+  }
+  .contact__direct {
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+  }
+  .contact__direct-intro {
+    color: var(--text-secondary);
+    margin-block: var(--space-3) var(--space-6);
+  }
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-grey-light);
+    background: var(--color-white);
+    margin-bottom: var(--space-4);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+  .channel:hover {
+    border-color: var(--color-electric);
+    transform: translateX(2px);
+  }
+  .channel__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: var(--radius-full);
+    background: var(--color-electric);
+    color: var(--color-white);
+  }
+  .channel__label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: var(--text-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+  }
+  .channel__value {
+    display: block;
+    font-weight: var(--weight-body);
+    color: var(--color-charcoal);
+  }
+  @media (max-width: 860px) {
+    .contact {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+</style>
+
+<script>
+  // Assemble email client-side to reduce spam scraping.
+  const link = document.querySelector<HTMLAnchorElement>("#email-channel");
+  if (link) {
+    const addr = `${link.dataset.user}@${link.dataset.domain}`;
+    link.href = `mailto:${addr}`;
+    const value = link.querySelector(".channel__value");
+    if (value) value.textContent = addr;
+  }
+</script>

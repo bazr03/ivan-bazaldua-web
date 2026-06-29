@@ -1,0 +1,86 @@
+---
+/**
+ * Button component — renders as <a> (link) or <button>.
+ * Variants: primary (charcoal pill), secondary (electric outline),
+ * ghost (light, for use on dark backgrounds).
+ */
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "ghost";
+  type?: "button" | "submit";
+  class?: string;
+  [key: string]: unknown;
+}
+const {
+  href,
+  variant = "primary",
+  type = "button",
+  class: className = "",
+  ...rest
+} = Astro.props;
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class={`btn btn--${variant} ${className}`}
+  href={href}
+  type={href ? undefined : type}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-8);
+    border-radius: var(--radius-full);
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base),
+      border-color var(--transition-base),
+      transform var(--transition-fast);
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn--primary {
+    background-color: var(--color-charcoal);
+    color: var(--color-white);
+  }
+  .btn--primary:hover {
+    background-color: #000;
+  }
+
+  .btn--secondary {
+    background-color: transparent;
+    color: var(--color-electric-dark);
+    border-color: var(--color-electric);
+  }
+  .btn--secondary:hover {
+    background-color: var(--color-electric);
+    color: var(--color-white);
+  }
+
+  .btn--ghost {
+    background-color: var(--color-white);
+    color: var(--color-charcoal);
+  }
+  .btn--ghost:hover {
+    background-color: var(--color-grey-light);
+  }
+</style>

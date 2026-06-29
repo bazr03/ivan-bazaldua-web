@@ -1,0 +1,361 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+
+const areas = [
+  {
+    title: "Caracterización del subsuelo",
+    methods: "TRE · TRS · MASW",
+    text: "Estructura del terreno, nivel freático, cavidades, profundidad de roca y suelos blandos antes de construir.",
+  },
+  {
+    title: "Exploración minera y de agua",
+    methods: "TRE · IP",
+    text: "Localiza recursos bajo tierra y reduce el riesgo de perforar a ciegas.",
+  },
+  {
+    title: "Servicios especializados",
+    methods: "Georradar · Tierras Físicas",
+    text: "Detección de instalaciones enterradas y resistividad de suelos para sistemas de puesta a tierra.",
+  },
+];
+
+const sectors = [
+  "Minería",
+  "Obra civil y geotecnia",
+  "Agua subterránea y pozos",
+];
+
+const differentiators = [
+  {
+    title: "Formación de posgrado",
+    text: "Maestría en Ciencias en Geofísica Aplicada (CICESE) respaldando cada estudio.",
+  },
+  {
+    title: "Métodos no invasivos",
+    text: "Caracterizo el subsuelo sin excavar ni dañar el terreno.",
+  },
+  {
+    title: "Interpretación, no solo datos",
+    text: "No entrego números sueltos: entrego conclusiones y recomendaciones accionables.",
+  },
+  {
+    title: "Dominio técnico completo",
+    text: "Del trabajo de campo al procesamiento especializado (Res2DInv, ZondST2D, ResIPy y más).",
+  },
+];
+
+const steps = [
+  { n: "01", title: "Contacto y objetivo", text: "Me cuentas tu proyecto y qué necesitas resolver." },
+  { n: "02", title: "Propuesta y método", text: "Recomiendo el estudio adecuado y cotizo el alcance." },
+  { n: "03", title: "Trabajo de campo", text: "Realizo las mediciones con equipo especializado." },
+  { n: "04", title: "Informe y recomendaciones", text: "Entrego resultados interpretados y pasos a seguir." },
+];
+---
+
+<Layout
+  title="Iván Bazaldúa — Geofísica Aplicada | Estudios del subsuelo"
+  description="Estudios geofísicos del subsuelo con métodos no invasivos para obra civil, minería y agua subterránea: tomografía eléctrica, sísmica, MASW, georradar y más."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <h1 class="hero__title text-accent">Iván Bazaldúa</h1>
+        <p class="hero__subtitle">M.C. Geofísica Aplicada</p>
+        <p class="hero__tagline">
+          Soluciones especializadas en geología, geofísica y geotecnia.
+        </p>
+        <div class="hero__actions">
+          <Button href="/servicios" variant="primary">Ver servicios</Button>
+          <Button href="/contacto" variant="secondary">Contáctame</Button>
+        </div>
+      </div>
+      <div class="hero__photo">
+        <img src="/img/ICBR_2.png" alt="Iván Bazaldúa" width="340" height="340" />
+      </div>
+    </div>
+    <div class="hero__strata" aria-hidden="true"></div>
+  </section>
+
+  <!-- Areas -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Áreas de trabajo</p>
+        <h2>Tres formas de conocer el subsuelo</h2>
+      </div>
+      <div class="grid-3">
+        {
+          areas.map((a) => (
+            <a class="area" href="/servicios">
+              <h3>{a.title}</h3>
+              <p class="area__methods">{a.methods}</p>
+              <p>{a.text}</p>
+              <span class="area__link">Ver servicios →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Sectors -->
+  <section class="section">
+    <div class="container section__header">
+      <p class="eyebrow">Sectores que atiendo</p>
+      <h2>Datos confiables antes de invertir</h2>
+      <p>
+        Trabajo de la mano con empresas y profesionales que necesitan
+        información precisa del subsuelo para tomar decisiones.
+      </p>
+      <ul class="sectors">
+        {sectors.map((s) => <li class="sector-badge">{s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <hr class="wave-divider" />
+
+  <!-- Differentiators -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Por qué trabajar conmigo</p>
+        <h2>Rigor científico con enfoque práctico</h2>
+      </div>
+      <div class="grid-2">
+        {
+          differentiators.map((d) => (
+            <div class="diff">
+              <h3>{d.title}</h3>
+              <p>{d.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Cómo trabajo</p>
+        <h2>Un proceso claro de principio a fin</h2>
+      </div>
+      <ol class="steps">
+        {
+          steps.map((s) => (
+            <li class="step">
+              <span class="step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <CtaBanner
+    heading="¿Tu proyecto requiere conocer el subsuelo?"
+  />
+</Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    background-color: var(--color-bg-soft);
+    overflow: hidden;
+  }
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    align-items: center;
+    gap: var(--space-12);
+    padding-block: clamp(var(--space-16), 8vw, var(--space-24));
+    position: relative;
+    z-index: 2;
+  }
+  .hero__title {
+    font-size: var(--text-h1);
+  }
+  .hero__subtitle {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-charcoal);
+    margin-top: var(--space-2);
+  }
+  .hero__tagline {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-top: var(--space-6);
+    max-width: 38ch;
+  }
+  .hero__actions {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    flex-wrap: wrap;
+  }
+  .hero__photo {
+    display: flex;
+    justify-content: center;
+  }
+  .hero__photo img {
+    width: clamp(220px, 28vw, 340px);
+    height: clamp(220px, 28vw, 340px);
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    border: 6px solid var(--color-electric);
+    box-shadow: var(--shadow-md);
+  }
+  .hero__strata {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 45%;
+    background:
+      linear-gradient(180deg, transparent, rgba(0, 168, 204, 0.06)),
+      repeating-linear-gradient(
+        175deg,
+        transparent 0 22px,
+        rgba(30, 30, 36, 0.04) 22px 23px
+      );
+    z-index: 1;
+  }
+
+  /* Grids */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
+  /* Area cards */
+  .area {
+    display: block;
+    background: var(--color-white);
+    border: 1px solid var(--color-grey-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+  .area:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .area__methods {
+    font-family: var(--font-heading);
+    color: var(--color-electric-dark);
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+    margin-block: var(--space-2) var(--space-4);
+  }
+  .area__link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    color: var(--color-electric-dark);
+    text-transform: uppercase;
+    font-size: var(--text-small);
+  }
+
+  /* Sectors */
+  .sectors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-8);
+  }
+  .sector-badge {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: var(--text-small);
+    padding: var(--space-3) var(--space-6);
+    border: 2px solid var(--color-electric);
+    border-radius: var(--radius-full);
+    color: var(--color-charcoal);
+  }
+
+  /* Differentiators */
+  .diff {
+    padding: var(--space-6);
+    border-left: 3px solid var(--color-electric);
+  }
+  .diff h3 {
+    margin-bottom: var(--space-2);
+  }
+  .diff p {
+    color: var(--text-secondary);
+  }
+
+  /* Steps */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+    counter-reset: step;
+  }
+  .step {
+    padding: var(--space-6);
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+  }
+  .step__num {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-bold);
+    font-size: 2.5rem;
+    color: var(--color-electric);
+    line-height: 1;
+  }
+  .step h3 {
+    margin-block: var(--space-3) var(--space-2);
+    font-size: 1.25rem;
+  }
+  .step p {
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .hero__actions {
+      justify-content: center;
+    }
+    .hero__tagline {
+      margin-inline: auto;
+    }
+    .hero__photo {
+      order: -1;
+    }
+    .grid-3,
+    .steps {
+      grid-template-columns: 1fr;
+    }
+    .grid-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
