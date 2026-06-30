@@ -98,7 +98,7 @@ export async function onRequest({ request, env }) {
     },
     body: JSON.stringify({
       from: "Sitio Web <onboarding@resend.dev>",
-      to: ["icesarbr@gmail.com"],
+      to: ["contacto@ibazaldua.com"],
       reply_to: email,
       subject: `Nueva consulta desde el sitio web — ${name}`,
       html: `
