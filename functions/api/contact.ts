@@ -1,15 +1,20 @@
-import type { APIRoute } from "astro";
-
-export const POST: APIRoute = async ({ request }) => {
+export async function onRequest({ request, env }) {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-AllowMethods": "POST, OPTIONS",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
   // Handle CORS preflight
   if (request.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  if (request.method !== "POST") {
+    return new Response("Method not allowed", {
+      status: 405,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
 
   let name: string, email: string, message: string, phone: string, sector: string;
@@ -56,13 +61,16 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  // Honeypot check — if botcheck is filled, silently succeed (mislead bots)
-  const botcheck = contentType.includes("application/json")
-    ? (await request.clone().json()).botcheck
-    : (await request.clone().formData()).get("botcheck");
+  // Honeypot check
+  let botcheck: string | null = null;
+  if (contentType.includes("application/json")) {
+    const clone = await request.clone().json();
+    botcheck = clone.botcheck;
+  } else {
+    botcheck = (await request.clone().formData()).get("botcheck")?.toString() ?? null;
+  }
 
   if (botcheck) {
-    // Pretend success to misdirect bots
     return new Response(
       JSON.stringify({ success: true }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
@@ -70,7 +78,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   // Send email via Resend
-  const resendApiKey = import.meta.env.RESEND_API_KEY;
+  const resendApiKey = env.RESEND_API_KEY;
   if (!resendApiKey) {
     console.error("RESEND_API_KEY is not set");
     return new Response(
@@ -117,4 +125,4 @@ export const POST: APIRoute = async ({ request }) => {
     JSON.stringify({ success: true }),
     { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
   );
-};
+}
