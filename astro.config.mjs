@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ivanbazaldua.com",
+  site: "https://ibazaldua.com",
   integrations: [sitemap()],
   build: {
     inlineStylesheets: "auto",
