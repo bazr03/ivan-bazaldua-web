@@ -1,3 +1,6 @@
+const escapeHtml = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
 export async function onRequest({ request, env }) {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -17,7 +20,7 @@ export async function onRequest({ request, env }) {
     });
   }
 
-  let name: string, email: string, message: string, phone: string, sector: string;
+  let name: string, email: string, message: string, phone: string, sector: string, botcheck: string | null;
 
   const contentType = request.headers.get("content-type") ?? "";
 
@@ -29,6 +32,7 @@ export async function onRequest({ request, env }) {
       message = body.message?.trim();
       phone = body.phone?.trim() ?? "";
       sector = body.sector?.trim() ?? "";
+      botcheck = body.botcheck ? String(body.botcheck) : null;
     } else {
       const formData = await request.formData();
       name = formData.get("name")?.toString().trim() ?? "";
@@ -36,11 +40,20 @@ export async function onRequest({ request, env }) {
       message = formData.get("message")?.toString().trim() ?? "";
       phone = formData.get("phone")?.toString().trim() ?? "";
       sector = formData.get("sector")?.toString().trim() ?? "";
+      botcheck = formData.get("botcheck")?.toString() ?? null;
     }
   } catch {
     return new Response(
       JSON.stringify({ error: "Error parsing form data" }),
       { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
+    );
+  }
+
+  // Honeypot check (captured during body parse above)
+  if (botcheck) {
+    return new Response(
+      JSON.stringify({ success: true }),
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
     );
   }
 
@@ -61,22 +74,6 @@ export async function onRequest({ request, env }) {
     );
   }
 
-  // Honeypot check
-  let botcheck: string | null = null;
-  if (contentType.includes("application/json")) {
-    const clone = await request.clone().json();
-    botcheck = clone.botcheck;
-  } else {
-    botcheck = (await request.clone().formData()).get("botcheck")?.toString() ?? null;
-  }
-
-  if (botcheck) {
-    return new Response(
-      JSON.stringify({ success: true }),
-      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
-    );
-  }
-
   // Send email via Resend
   const resendApiKey = env.RESEND_API_KEY;
   if (!resendApiKey) {
@@ -87,8 +84,8 @@ export async function onRequest({ request, env }) {
     );
   }
 
-  const sectorLine = sector ? `\n<strong>Tipo de proyecto:</strong> ${sector}` : "";
-  const phoneLine = phone ? `\n<strong>Teléfono:</strong> <a href="tel:${phone}">${phone}</a>` : "";
+  const sectorLine = sector ? `\n<strong>Tipo de proyecto:</strong> ${escapeHtml(sector)}` : "";
+  const phoneLine = phone ? `\n<strong>Teléfono:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a>` : "";
 
   const resendResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -102,11 +99,11 @@ export async function onRequest({ request, env }) {
       reply_to: email,
       subject: `Nueva consulta desde el sitio web — ${name}`,
       html: `
-        <strong>Nombre:</strong> ${name}<br/>
-        <strong>Email:</strong> <a href="mailto:${email}">${email}</a>${phoneLine}${sectorLine}
+        <strong>Nombre:</strong> ${escapeHtml(name)}<br/>
+        <strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>${phoneLine}${sectorLine}
         <hr/>
         <strong>Mensaje:</strong><br/>
-        <p>${message.replace(/\n/g, "<br/>")}</p>
+        <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
       `,
       text: `Nombre: ${name}\nEmail: ${email}${phone ? `\nTeléfono: ${phone}` : ""}${sector ? `\nTipo de proyecto: ${sector}` : ""}\n\nMensaje:\n${message}`,
     }),
