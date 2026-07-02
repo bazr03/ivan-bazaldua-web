@@ -11,7 +11,7 @@ export const site = {
     "Estudios geofísicos del subsuelo con métodos no invasivos para obra civil, minería y agua subterránea. Tomografía eléctrica, sísmica, MASW, georradar y más.",
   url: "https://ivanbazaldua.com",
   contact: {
-    email: "icesarbr@gmail.com",
+    email: "contacto@ibazaldua.com",
     // International format, digits only, for wa.me links.
     whatsapp: "528211021129",
     // Pretty format for display.
