@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e2a36"/>
+      <stop offset="100%" stop-color="#0f1822"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00c4e8"/>
+      <stop offset="100%" stop-color="#008fa8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle strata lines -->
+  <g opacity="0.07" stroke="#00a8cc" stroke-width="1" fill="none">
+    <path d="M0 480 Q300 460 600 490 T1200 470"/>
+    <path d="M0 510 Q300 500 600 520 T1200 505"/>
+    <path d="M0 540 Q300 530 600 545 T1200 535"/>
+    <path d="M0 570 Q300 565 600 575 T1200 565"/>
+  </g>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="8" height="630" fill="url(#accent)"/>
+
+  <!-- Logo circle -->
+  <circle cx="120" cy="315" r="70" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.9"/>
+  <circle cx="120" cy="315" r="55" fill="url(#accent)" opacity="0.15"/>
+  <!-- Abstract geophysics wave icon -->
+  <path d="M85 315 Q100 295 115 315 Q130 335 145 315 Q160 295 175 315"
+        fill="none" stroke="#00c4e8" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="85" cy="315" r="4" fill="#00c4e8"/>
+  <circle cx="175" cy="315" r="4" fill="#00c4e8"/>
+
+  <!-- Name -->
+  <text x="220" y="290" font-family="Georgia, serif" font-size="56" font-weight="bold" fill="#ffffff">Iván Bazaldúa</text>
+
+  <!-- Title -->
+  <text x="220" y="335" font-family="Arial, sans-serif" font-size="24" fill="#00c4e8" letter-spacing="2">M.C. GEOFÍSICA APLICADA</text>
+
+  <!-- Divider -->
+  <line x1="220" y1="360" x2="700" y2="360" stroke="#00c4e8" stroke-width="1" opacity="0.5"/>
+
+  <!-- Tagline -->
+  <text x="220" y="400" font-family="Arial, sans-serif" font-size="20" fill="#a0b4c8">Estudios geofísicos del subsuelo</text>
+  <text x="220" y="430" font-family="Arial, sans-serif" font-size="20" fill="#a0b4c8">Métodos no invasivos para obra civil, minería y agua</text>
+
+  <!-- Bottom accent -->
+  <rect x="0" y="610" width="1200" height="20" fill="url(#accent)" opacity="0.6"/>
+
+  <!-- URL -->
+  <text x="220" y="590" font-family="Arial, sans-serif" font-size="16" fill="#5a7080">ibazaldua.com</text>
+</svg>

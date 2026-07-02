@@ -9,7 +9,7 @@ export const site = {
   tagline: "Soluciones especializadas en geología, geofísica y geotecnia",
   description:
     "Estudios geofísicos del subsuelo con métodos no invasivos para obra civil, minería y agua subterránea. Tomografía eléctrica, sísmica, MASW, georradar y más.",
-  url: "https://ivanbazaldua.com",
+  url: "https://ibazaldua.com",
   contact: {
     email: "contacto@ibazaldua.com",
     // International format, digits only, for wa.me links.
