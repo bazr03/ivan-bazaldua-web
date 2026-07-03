@@ -41,7 +41,7 @@ body {
   font-size: var(--text-body);
   line-height: var(--leading-normal);
   color: var(--text-primary);
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
@@ -155,6 +155,12 @@ p {
 .section--dark {
   background-color: var(--color-charcoal);
   color: var(--text-on-dark);
+}
+
+/* In dark mode the forced-dark strip becomes a subtle elevated surface
+   (bg-soft) so it doesn't clash with the page bg. Text stays light. */
+[data-theme="dark"] .section--dark {
+  background-color: var(--color-bg-soft);
 }
 
 .section--dark h2,

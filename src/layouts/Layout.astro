@@ -119,6 +119,24 @@ const breadcrumbJsonLd = showBreadcrumb
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
+    {/* FOUC prevention — synchronous, before first paint. Reads stored theme
+        or falls back to prefers-color-scheme, sets data-theme on <html> so the
+        dark token block applies before the page renders. */}
+    <script is:inline>
+      (function () {
+        // ponytail: no live matchMedia listener — system theme change while
+        // the tab is open won't auto-flip; re-opening the tab re-syncs. The
+        // manual toggle still works in all cases.
+        var t = localStorage.getItem("theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />

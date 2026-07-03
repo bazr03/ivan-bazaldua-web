@@ -1,0 +1,119 @@
+---
+/**
+ * Theme toggle — accessible sun/moon button. Flips data-theme on <html>,
+ * persists to localStorage. Inline SVG (no icon lib), no framework.
+ * Renders once in the nav list; the same element serves desktop + mobile.
+ */
+---
+
+<button
+  class="theme-toggle"
+  type="button"
+  aria-label="Switch to dark mode"
+  aria-pressed="false"
+  data-theme-toggle
+>
+  <svg
+    class="theme-toggle__icon theme-toggle__icon--sun"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+  </svg>
+  <svg
+    class="theme-toggle__icon theme-toggle__icon--moon"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color var(--transition-fast),
+      border-color var(--transition-fast), color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+  .theme-toggle:hover {
+    border-color: var(--color-electric);
+    color: var(--color-electric);
+  }
+  .theme-toggle:active {
+    transform: scale(0.94);
+  }
+
+  /* Default (light / no-JS) shows the moon — "click to go dark".
+     Dark shows the sun — "click to go light". */
+  .theme-toggle__icon {
+    display: none;
+  }
+  .theme-toggle__icon--moon {
+    display: block;
+  }
+  :global([data-theme="dark"]) .theme-toggle__icon--moon {
+    display: none;
+  }
+  :global([data-theme="dark"]) .theme-toggle__icon--sun {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // ponytail: no live matchMedia listener — same ceiling as the FOUC script.
+  const buttons = document.querySelectorAll("[data-theme-toggle]");
+
+  const sync = () => {
+    const dark = document.documentElement.dataset.theme === "dark";
+    buttons.forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(dark));
+      btn.setAttribute(
+        "aria-label",
+        dark ? "Switch to light mode" : "Switch to dark mode",
+      );
+    });
+  };
+
+  buttons.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const next =
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem("theme", next);
+      sync();
+    }),
+  );
+
+  sync();
+</script>

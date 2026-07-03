@@ -5,6 +5,7 @@
  */
 import Logo from "./Logo.astro";
 import Button from "./Button.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import { navLinks } from "../data/site.ts";
 
 const path = Astro.url.pathname;
@@ -15,7 +16,7 @@ const isActive = (href: string) =>
 <header class="nav">
   <div class="container nav__inner">
     <a href="/" class="nav__logo" aria-label="Inicio — Iván Bazaldúa">
-      <Logo size={42} />
+      <Logo size={50} />
     </a>
 
     <button
@@ -45,6 +46,9 @@ const isActive = (href: string) =>
         <li class="nav__cta">
           <Button href="/contacto" variant="primary">Contacto</Button>
         </li>
+        <li class="nav__theme">
+          <ThemeToggle />
+        </li>
       </ul>
     </nav>
   </div>
@@ -55,9 +59,13 @@ const isActive = (href: string) =>
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: rgba(255, 255, 255, 0.92);
+    /* Translucent surface so backdrop-filter blur stays visible.
+       color-mix is the native way to alpha-mix a token; the solid
+       fallback precedes it for older browsers. */
+    background-color: var(--color-surface);
+    background-color: color-mix(in srgb, var(--color-surface) 92%, transparent);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--color-grey-light);
+    border-bottom: 1px solid var(--color-border);
   }
   .nav__inner {
     display: flex;
@@ -76,7 +84,7 @@ const isActive = (href: string) =>
     text-transform: uppercase;
     letter-spacing: 0.06em;
     font-size: var(--text-small);
-    color: var(--color-charcoal);
+    color: var(--text-primary);
     padding-block: var(--space-2);
     position: relative;
     transition: color var(--transition-fast);
@@ -94,10 +102,10 @@ const isActive = (href: string) =>
     transition: transform var(--transition-base);
   }
   .nav__link:hover {
-    color: var(--color-electric-dark);
+    color: var(--color-accent-hover);
   }
   .nav__link.is-active {
-    color: var(--color-electric-dark);
+    color: var(--color-accent-hover);
   }
   .nav__link.is-active::after,
   .nav__link:hover::after {
@@ -119,7 +127,7 @@ const isActive = (href: string) =>
     display: block;
     width: 26px;
     height: 2px;
-    background-color: var(--color-charcoal);
+    background-color: var(--text-primary);
     transition: transform var(--transition-base), opacity var(--transition-fast);
   }
   .nav__toggle[aria-expanded="true"] span:nth-child(1) {
@@ -141,14 +149,14 @@ const isActive = (href: string) =>
       top: var(--nav-height);
       left: 0;
       right: 0;
-      background-color: var(--color-white);
-      border-bottom: 1px solid var(--color-grey-light);
+      background-color: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
       max-height: 0;
       overflow: hidden;
       transition: max-height var(--transition-base);
     }
     .nav__menu.is-open {
-      max-height: 420px;
+      max-height: 480px;
     }
     .nav__list {
       flex-direction: column;
@@ -158,11 +166,17 @@ const isActive = (href: string) =>
     }
     .nav__list li {
       padding-block: var(--space-3);
-      border-bottom: 1px solid var(--color-grey-light);
+      border-bottom: 1px solid var(--color-border);
     }
     .nav__cta {
       border-bottom: none !important;
       padding-top: var(--space-6) !important;
+    }
+    .nav__theme {
+      border-bottom: none !important;
+      padding-top: var(--space-4) !important;
+      display: flex;
+      justify-content: center;
     }
   }
 </style>

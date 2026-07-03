@@ -21,10 +21,23 @@
   --color-success: #10b981;
   --color-error: #ef4444;
 
+  /* ----- Surfaces (semantic, flip with theme) ----- */
+  --color-bg: var(--color-white); /* page background */
+  --color-surface: var(--color-white); /* cards, nav, inputs */
+  --color-border: var(--color-grey-light); /* hairlines on light surfaces */
+
+  /* ----- Accent surface (high-emphasis CTA: primary btn, badges) ----- */
+  --color-accent: var(--color-charcoal);
+  --color-on-accent: var(--color-white);
+  --color-accent-hover: #000; /* darker than charcoal in light */
+
   /* ----- Text roles ----- */
   --text-primary: var(--color-charcoal);
   --text-secondary: var(--color-grey);
   --text-on-dark: var(--color-white);
+
+  /* Native form controls / scrollbars match the theme */
+  color-scheme: light;
 
   /* ----- Typography families ----- */
   --font-heading: "Oswald", system-ui, sans-serif;
@@ -77,4 +90,34 @@
   /* ----- Transitions ----- */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
+}
+
+/* ==========================================================================
+   Dark theme — lifted charcoal palette (not pure black), elevated surfaces
+   a touch lighter. Brand cyan stays; accent flips to cyan so CTAs pop.
+   Applied via data-theme on <html>, set by the FOUC-prevention script.
+   ========================================================================== */
+
+[data-theme="dark"] {
+  /* Surfaces — bg is the page, surface lifts one step, bg-soft lifts again */
+  --color-bg: #141419;
+  --color-surface: #1e1e24; /* = brand charcoal, distinct from page bg */
+  --color-border: #2e2e36;
+  --color-bg-soft: #25262e; /* soft/elevated sections (hero, steps, CTA) */
+
+  /* Accent flips to brand cyan — dark text on cyan passes AAA */
+  --color-accent: var(--color-electric);
+  --color-on-accent: var(--color-charcoal);
+  --color-accent-hover: var(--color-electric-dark);
+
+  /* Text flips to light */
+  --text-primary: var(--color-white);
+  --text-secondary: #9ca3af;
+  --text-on-dark: var(--color-white); /* section--dark still a dark surface */
+
+  /* Shadows become blacker so they read on dark surfaces */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  color-scheme: dark;
 }

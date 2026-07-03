@@ -10,6 +10,16 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="Inicio — Iván Bazaldúa">
+        <img
+          src="/img/icbr_logo_5_estratos_sin_texto_transparente.png"
+          width="170"
+          height="76"
+          style="aspect-ratio: 482 / 216;"
+          alt="Iván Bazaldúa — Geofísica Aplicada"
+          loading="lazy"
+        />
+      </a>
       <p class="footer__name">Iván Bazaldúa</p>
       <p class="footer__role">M.C. Geofísica Aplicada</p>
       <p class="footer__tag">
@@ -61,6 +71,16 @@ const year = new Date().getFullYear();
     grid-template-columns: 2fr 1fr 1fr;
     gap: var(--space-12);
     padding-block: var(--space-16);
+  }
+  .footer__logo {
+    display: inline-block;
+    margin-bottom: var(--space-4);
+    line-height: 0;
+  }
+  .footer__logo img {
+    display: block;
+    width: 170px;
+    height: auto;
   }
   .footer__name {
     font-family: var(--font-heading);

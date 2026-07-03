@@ -130,9 +130,9 @@ import { site, whatsappPrefill } from "../data/site.ts";
   .field textarea {
     width: 100%;
     padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--color-grey-light);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    background: var(--color-white);
+    background: var(--color-surface);
     font-family: var(--font-body);
     transition: border-color var(--transition-fast);
   }
@@ -150,8 +150,8 @@ import { site, whatsappPrefill } from "../data/site.ts";
     padding: var(--space-4);
     border: none;
     border-radius: var(--radius-full);
-    background: var(--color-charcoal);
-    color: var(--color-white);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
     font-family: var(--font-heading);
     font-weight: var(--weight-heading-semibold);
     text-transform: uppercase;
@@ -160,7 +160,7 @@ import { site, whatsappPrefill } from "../data/site.ts";
     transition: background-color var(--transition-base);
   }
   .contact__submit:hover {
-    background: #000;
+    background: var(--color-accent-hover);
   }
   .contact__note {
     margin-top: var(--space-4);
@@ -182,8 +182,8 @@ import { site, whatsappPrefill } from "../data/site.ts";
     gap: var(--space-4);
     padding: var(--space-4);
     border-radius: var(--radius-sm);
-    border: 1px solid var(--color-grey-light);
-    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
     margin-bottom: var(--space-4);
     transition: border-color var(--transition-fast), transform var(--transition-fast);
   }
@@ -213,7 +213,7 @@ import { site, whatsappPrefill } from "../data/site.ts";
   .channel__value {
     display: block;
     font-weight: var(--weight-body);
-    color: var(--color-charcoal);
+    color: var(--text-primary);
   }
   @media (max-width: 860px) {
     .contact {
