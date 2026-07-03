@@ -12,11 +12,22 @@ const year = new Date().getFullYear();
     <div class="footer__brand">
       <a href="/" class="footer__logo" aria-label="Inicio — Iván Bazaldúa">
         <img
+          class="footer__logo-mark footer__logo-mark--light"
           src="/img/icbr_logo_5_estratos_sin_texto_transparente.png"
           width="170"
           height="76"
           style="aspect-ratio: 482 / 216;"
           alt="Iván Bazaldúa — Geofísica Aplicada"
+          loading="lazy"
+        />
+        <img
+          class="footer__logo-mark footer__logo-mark--dark"
+          src="/img/icbr_logo_5_dark_optimized.png"
+          width="170"
+          height="76"
+          style="aspect-ratio: 482 / 216;"
+          alt=""
+          aria-hidden="true"
           loading="lazy"
         />
       </a>
@@ -77,10 +88,19 @@ const year = new Date().getFullYear();
     margin-bottom: var(--space-4);
     line-height: 0;
   }
-  .footer__logo img {
+  .footer__logo-mark {
     display: block;
     width: 170px;
     height: auto;
+  }
+  .footer__logo-mark--dark {
+    display: none;
+  }
+  :global([data-theme="dark"]) .footer__logo-mark--light {
+    display: none;
+  }
+  :global([data-theme="dark"]) .footer__logo-mark--dark {
+    display: block;
   }
   .footer__name {
     font-family: var(--font-heading);

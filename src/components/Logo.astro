@@ -12,15 +12,25 @@ const { size = 44, withText = true, class: className = "" } = Astro.props;
 ---
 
 <span class={`logo ${className}`}>
-  <img
-    class="logo__mark"
-    src="/img/icbr_logo_5_estratos_sin_texto_transparente.png"
-    width={Math.round((size * 482) / 216)}
-    height={size}
-    style="aspect-ratio: 482 / 216;"
-    alt="Logotipo Iván Bazaldúa"
-    loading="eager"
-  />
+<img
+      class="logo__mark logo__mark--light"
+      src="/img/icbr_logo_5_estratos_sin_texto_transparente.png"
+      width={Math.round((size * 482) / 216)}
+      height={size}
+      style="aspect-ratio: 482 / 216;"
+      alt="Logotipo Iván Bazaldúa"
+      loading="eager"
+    />
+    <img
+      class="logo__mark logo__mark--dark"
+      src="/img/icbr_logo_5_dark_optimized.png"
+      width={Math.round((size * 482) / 216)}
+      height={size}
+      style="aspect-ratio: 482 / 216;"
+      alt=""
+      aria-hidden="true"
+      loading="eager"
+    />
   {
     withText && (
       <span class="logo__text">
@@ -39,6 +49,15 @@ const { size = 44, withText = true, class: className = "" } = Astro.props;
   }
   .logo__mark {
     flex-shrink: 0;
+  }
+  .logo__mark--dark {
+    display: none;
+  }
+  :global([data-theme="dark"]) .logo__mark--light {
+    display: none;
+  }
+  :global([data-theme="dark"]) .logo__mark--dark {
+    display: inline-block;
   }
   .logo__text {
     display: flex;
