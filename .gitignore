@@ -21,3 +21,6 @@ pnpm-debug.log*
 # macOS / editors
 .DS_Store
 *.local
+
+# design source assets (logo variants) — runtime copies live in public/img/
+/img/
