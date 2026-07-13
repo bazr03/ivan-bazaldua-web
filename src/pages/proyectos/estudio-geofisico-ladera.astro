@@ -2,6 +2,12 @@
 import Layout from "../../layouts/Layout.astro";
 import Button from "../../components/Button.astro";
 import CtaBanner from "../../components/CtaBanner.astro";
+import { site } from "../../data/site.ts";
+
+const pageTitle = "Estudio geofísico en ladera para orientar cimentaciones, cortes y drenaje";
+const pageDescription =
+  "Caso de estudio de TRE en ladera para reducir incertidumbre geotécnica en cortes, drenaje, plataformas y cimentaciones sin exponer datos privados.";
+const pageUrl = new URL("/proyectos/estudio-geofisico-ladera/", site.url).href;
 
 const stats = [
   ["6", "perfiles TRE"],
@@ -31,11 +37,51 @@ const value = [
   "Anticipar condiciones de excavación y posibles necesidades de equipo pesado.",
   "Apoyar el diseño de plataformas, cimentaciones, taludes y drenaje.",
 ];
+
+const decisions = [
+  "Dónde concentrar sondeos para validar las zonas de mayor incertidumbre.",
+  "Qué sectores requieren mayor atención geotécnica antes del diseño.",
+  "Dónde podría encontrarse material competente a menor profundidad.",
+  "Qué zonas conviene revisar para drenaje y estabilidad de taludes.",
+  "Cómo anticipar variaciones laterales antes de definir plataformas y cortes.",
+];
+
+const limitations = [
+  "La TRE entrega un modelo indirecto de resistividad eléctrica.",
+  "Las interpretaciones deben validarse con sondeos, calicatas o ensayos.",
+  "La profundidad efectiva depende de geometría, arreglo, ruido y condiciones del terreno.",
+  "Los resultados orientan exploración directa y reducen incertidumbre.",
+];
+
+const caseStudyJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: pageTitle,
+  description: pageDescription,
+  about: [
+    "Tomografía de Resistividad Eléctrica",
+    "Geotecnia para obra civil",
+    "Cimentaciones en ladera",
+    "Drenaje y cortes de terreno",
+  ],
+  author: {
+    "@type": "Person",
+    name: site.name,
+    url: site.url,
+  },
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Iván Bazaldúa — Geofísica Aplicada",
+    url: site.url,
+  },
+  mainEntityOfPage: pageUrl,
+  url: pageUrl,
+};
 ---
 
 <Layout
-  title="Caso TRE en desarrollo en ladera — Iván Bazaldúa"
-  description="Caso de estudio de Tomografía de Resistividad Eléctrica para caracterizar el subsuelo y reducir riesgos geotécnicos en una zona de ladera."
+  title={`${pageTitle} — Iván Bazaldúa`}
+  description={pageDescription}
   ogType="article"
 >
   <section class="section--soft page-head">
@@ -47,7 +93,7 @@ const value = [
           <span>Caso TRE en ladera</span>
         </nav>
         <p class="eyebrow">Caso de estudio · Obra civil</p>
-        <h1>Caracterización geofísica para un proyecto en zona de ladera</h1>
+        <h1>{pageTitle}</h1>
         <p class="page-head__lead">
           Mediante Tomografía de Resistividad Eléctrica se obtuvo un modelo
           continuo del subsuelo hasta aproximadamente 15 metros de profundidad
@@ -99,6 +145,11 @@ const value = [
           cimentación. Una exploración basada solo en puntos aislados podía dejar
           sin identificar transiciones relevantes entre suelo, roca alterada y
           materiales de mayor competencia.
+        </p>
+        <p>
+          Sin esa lectura previa, el riesgo comercial era claro: sobrecostos por
+          cortes no previstos, estabilización adicional, excavación difícil,
+          drenaje insuficiente o cambios de cimentación durante la obra.
         </p>
       </div>
     </div>
@@ -161,6 +212,30 @@ const value = [
     </div>
   </section>
 
+  <section class="section section--soft">
+    <div class="container content-grid">
+      <div>
+        <p class="eyebrow">Decisiones que facilitó el estudio</p>
+        <h2>Pasar de supuestos generales a prioridades de investigación</h2>
+      </div>
+      <ul class="value-list">
+        {decisions.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <div>
+        <p class="eyebrow">Alcance y limitaciones</p>
+        <h2>Qué puede y qué no puede confirmar una TRE</h2>
+      </div>
+      <ul class="value-list">
+        {limitations.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
   <section class="section section--soft privacy">
     <div class="container">
       <p class="eyebrow">Privacidad del caso</p>
@@ -174,10 +249,12 @@ const value = [
   </section>
 
   <CtaBanner
-    heading="¿Tu proyecto está en una ladera o zona de riesgo geológico?"
-    text="La geofísica permite obtener una visión continua del subsuelo y definir con mayor precisión dónde investigar antes de construir."
-    buttonLabel="Solicitar evaluación"
+    heading="¿Vas a construir en una ladera o terreno irregular?"
+    text="Puedo ayudarte a definir dónde investigar antes de diseñar cortes, plataformas o cimentaciones."
+    buttonLabel="Evaluar mi terreno"
   />
+
+  <script type="application/ld+json" set:html={JSON.stringify(caseStudyJsonLd)} />
 </Layout>
 
 <style>

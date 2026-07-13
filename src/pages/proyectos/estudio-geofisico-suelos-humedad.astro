@@ -2,6 +2,12 @@
 import Layout from "../../layouts/Layout.astro";
 import Button from "../../components/Button.astro";
 import CtaBanner from "../../components/CtaBanner.astro";
+import { site } from "../../data/site.ts";
+
+const pageTitle = "TRE para identificar humedad y suelos finos antes del diseño de cimentaciones";
+const pageDescription =
+  "Caso de estudio de TRE para ubicar humedad y suelos finos que pueden afectar cimentaciones, losas, drenaje y mantenimiento sin exponer datos privados.";
+const pageUrl = new URL("/proyectos/estudio-geofisico-suelos-humedad/", site.url).href;
 
 const stats = [
   ["2", "perfiles TRE"],
@@ -27,11 +33,50 @@ const value = [
   "Considerar drenaje perimetral, pendientes superficiales e impermeabilización.",
   "Reducir cambios durante obra por condiciones de humedad no previstas.",
 ];
+
+const decisions = [
+  "Dónde verificar humedad con sondeos o exploración directa.",
+  "Qué ensayos priorizar para evaluar plasticidad, expansión y consolidación.",
+  "Qué zonas conviene considerar para drenaje y control de agua.",
+  "Qué áreas pueden tener comportamiento sensible por finos y humedad.",
+];
+
+const limitations = [
+  "La TRE entrega un modelo indirecto de resistividad eléctrica.",
+  "Las interpretaciones deben validarse con sondeos, calicatas o ensayos.",
+  "La profundidad efectiva depende de geometría, arreglo, ruido y condiciones del terreno.",
+  "Los resultados orientan exploración directa y reducen incertidumbre.",
+];
+
+const caseStudyJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: pageTitle,
+  description: pageDescription,
+  about: [
+    "Tomografía de Resistividad Eléctrica",
+    "Suelos finos",
+    "Humedad del subsuelo",
+    "Diseño de cimentaciones",
+  ],
+  author: {
+    "@type": "Person",
+    name: site.name,
+    url: site.url,
+  },
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Iván Bazaldúa — Geofísica Aplicada",
+    url: site.url,
+  },
+  mainEntityOfPage: pageUrl,
+  url: pageUrl,
+};
 ---
 
 <Layout
-  title="Caso TRE en suelos finos y humedad — Iván Bazaldúa"
-  description="Caso de estudio de Tomografía de Resistividad Eléctrica para identificar suelos finos, anomalías de humedad y criterios de verificación geotécnica."
+  title={`${pageTitle} — Iván Bazaldúa`}
+  description={pageDescription}
   ogType="article"
 >
   <section class="section--soft page-head">
@@ -43,7 +88,7 @@ const value = [
           <span>Caso TRE en suelos finos</span>
         </nav>
         <p class="eyebrow">Caso de estudio · Obra civil</p>
-        <h1>Caracterización geofísica de suelos finos y zonas de humedad</h1>
+        <h1>{pageTitle}</h1>
         <p class="page-head__lead">
           Mediante Tomografía de Resistividad Eléctrica se obtuvo un modelo
           continuo de los primeros metros del subsuelo para orientar la mecánica
@@ -93,6 +138,11 @@ const value = [
           Una exploración puntual podía pasar por alto variaciones laterales
           importantes. La TRE permitió obtener una lectura continua para decidir
           dónde concentrar la verificación directa.
+        </p>
+        <p>
+          La incertidumbre podía traducirse en asentamientos, expansión de suelos,
+          drenaje deficiente, desempeño irregular de losas, ajustes de cimentación
+          y mayores costos de mantenimiento.
         </p>
       </div>
     </div>
@@ -154,6 +204,30 @@ const value = [
     </div>
   </section>
 
+  <section class="section section--soft">
+    <div class="container content-grid">
+      <div>
+        <p class="eyebrow">Decisiones que facilitó el estudio</p>
+        <h2>Enfocar la verificación donde el agua y los finos importan más</h2>
+      </div>
+      <ul class="value-list">
+        {decisions.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <div>
+        <p class="eyebrow">Alcance y limitaciones</p>
+        <h2>Qué puede y qué no puede confirmar una TRE</h2>
+      </div>
+      <ul class="value-list">
+        {limitations.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
   <section class="section section--soft privacy">
     <div class="container">
       <p class="eyebrow">Privacidad del caso</p>
@@ -167,10 +241,12 @@ const value = [
   </section>
 
   <CtaBanner
-    heading="¿Tu proyecto está sobre suelos arcillosos o presenta humedad?"
-    text="La geofísica permite visualizar cambios en el subsuelo y orientar con mayor precisión los estudios necesarios antes de construir."
-    buttonLabel="Solicitar evaluación"
+    heading="¿Tu terreno presenta humedad, arcillas o dudas sobre cimentación?"
+    text="Una TRE puede ayudarte a ubicar zonas críticas antes de invertir en obra."
+    buttonLabel="Revisar mi caso"
   />
+
+  <script type="application/ld+json" set:html={JSON.stringify(caseStudyJsonLd)} />
 </Layout>
 
 <style>

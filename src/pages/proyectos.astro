@@ -6,25 +6,29 @@ import CtaBanner from "../components/CtaBanner.astro";
 
 const caseStudies = [
   {
-    title: "Caracterización geofísica en zona de ladera",
+    title: "Estudio geofísico en ladera para orientar cimentaciones, cortes y drenaje",
     sector: "Obra civil",
     location: "Zona de ladera",
     method: "Tomografía de Resistividad Eléctrica (TRE)",
+    pain:
+      "Riesgo de sobrecostos por cortes, excavación difícil, drenaje insuficiente o cambios de cimentación durante obra.",
     objective:
       "Reconocer cambios laterales y en profundidad antes de definir plataformas, cortes y cimentaciones.",
     result:
-      "Se identificaron tres unidades geoeléctricas y zonas prioritarias para la exploración geotécnica directa.",
+      "Definir dónde concentrar sondeos, revisar taludes y anticipar variaciones laterales antes de cortar o nivelar.",
     href: "/proyectos/estudio-geofisico-ladera/",
   },
   {
-    title: "Caracterización geofísica de suelos finos y humedad",
+    title: "TRE para identificar humedad y suelos finos antes del diseño de cimentaciones",
     sector: "Obra civil",
     location: "Entorno urbano anonimizado",
     method: "Tomografía de Resistividad Eléctrica (TRE)",
+    pain:
+      "Riesgo de asentamientos, expansión, drenaje deficiente, afectación en losas y costos de mantenimiento.",
     objective:
       "Identificar anomalías de humedad y condiciones relevantes para cimentaciones, losas y drenaje.",
     result:
-      "Se delimitaron dos unidades geoeléctricas y zonas que requieren verificación geotécnica directa.",
+      "Priorizar sondeos, ensayos y zonas de drenaje donde la humedad y los finos pueden cambiar el comportamiento del terreno.",
     href: "/proyectos/estudio-geofisico-suelos-humedad/",
   },
 ];
@@ -64,9 +68,10 @@ const hasProjects = projects.length > 0 || caseStudies.length > 0;
                   </h2>
                   <dl>
                     <div><dt>Ubicación</dt><dd>{p.location}</dd></div>
+                    <div><dt>Riesgo a controlar</dt><dd>{p.pain}</dd></div>
                     <div><dt>Método</dt><dd>{p.method}</dd></div>
                     <div><dt>Objetivo</dt><dd>{p.objective}</dd></div>
-                    <div><dt>Resultado</dt><dd>{p.result}</dd></div>
+                    <div><dt>Decisión clave</dt><dd>{p.result}</dd></div>
                   </dl>
                   <Button href={p.href} variant="secondary" class="project__link">
                     Ver caso de estudio
