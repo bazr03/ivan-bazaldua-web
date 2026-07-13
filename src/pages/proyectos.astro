@@ -4,10 +4,24 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 
+const caseStudies = [
+  {
+    title: "Caracterización geofísica en zona de ladera",
+    sector: "Obra civil",
+    location: "Zona de ladera",
+    method: "Tomografía de Resistividad Eléctrica (TRE)",
+    objective:
+      "Reconocer cambios laterales y en profundidad antes de definir plataformas, cortes y cimentaciones.",
+    result:
+      "Se identificaron tres unidades geoeléctricas y zonas prioritarias para la exploración geotécnica directa.",
+    href: "/proyectos/estudio-geofisico-ladera/",
+  },
+];
+
 // Published projects only (draft: false), ordered.
 const projects = (await getCollection("proyectos", ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
-const hasProjects = projects.length > 0;
+const hasProjects = projects.length > 0 || caseStudies.length > 0;
 ---
 
 <Layout
@@ -30,11 +44,30 @@ const hasProjects = projects.length > 0;
       {
         hasProjects ? (
           <div class="project-grid">
+            {caseStudies.map((p) => (
+              <article class="project">
+                <div class="project__body">
+                  <span class="project__sector">{p.sector}</span>
+                  <h2 class="project__title">
+                    <a href={p.href}>{p.title}</a>
+                  </h2>
+                  <dl>
+                    <div><dt>Ubicación</dt><dd>{p.location}</dd></div>
+                    <div><dt>Método</dt><dd>{p.method}</dd></div>
+                    <div><dt>Objetivo</dt><dd>{p.objective}</dd></div>
+                    <div><dt>Resultado</dt><dd>{p.result}</dd></div>
+                  </dl>
+                  <Button href={p.href} variant="secondary" class="project__link">
+                    Ver caso de estudio
+                  </Button>
+                </div>
+              </article>
+            ))}
             {projects.map((p) => (
               <article class="project">
                 {p.data.image && (
                   <div class="project__media">
-                    <img src={p.data.image.src} alt={p.data.title} loading="lazy" />
+                    <img src={p.data.image.src} alt={p.data.title} loading="lazy" decoding="async" />
                   </div>
                 )}
                 <div class="project__body">
@@ -103,7 +136,7 @@ const hasProjects = projects.length > 0;
     font-size: var(--text-caption);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-electric-dark);
+    color: var(--color-accent-text);
     margin-bottom: var(--space-2);
   }
   .project__title {
@@ -123,6 +156,9 @@ const hasProjects = projects.length > 0;
   }
   .project dd {
     margin-top: var(--space-1);
+  }
+  .project__link {
+    margin-top: var(--space-6);
   }
   .placeholder {
     text-align: center;

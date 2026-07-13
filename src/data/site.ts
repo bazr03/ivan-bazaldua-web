@@ -17,6 +17,7 @@ export const site = {
     // Pretty format for display.
     phoneDisplay: "+52 821 102 1129",
   },
+  sameAs: ["https://www.linkedin.com/in/ivanc-bazalduar/"],
 } as const;
 
 export const navLinks = [

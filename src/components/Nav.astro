@@ -153,10 +153,13 @@ const isActive = (href: string) =>
       border-bottom: 1px solid var(--color-border);
       max-height: 0;
       overflow: hidden;
+      visibility: hidden;
       transition: max-height var(--transition-base);
     }
     .nav__menu.is-open {
       max-height: 480px;
+      visibility: visible;
+      transition: max-height var(--transition-base);
     }
     .nav__list {
       flex-direction: column;

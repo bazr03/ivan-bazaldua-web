@@ -17,6 +17,7 @@
 
   /* ----- Derived / semantic colors ----- */
   --color-electric-dark: #0089a8; /* hover state for electric */
+  --color-accent-text: #007a96; /* readable accent text on light surfaces */
   --color-bg-soft: #f7f6f2; /* soft cream background (hero) */
   --color-success: #10b981;
   --color-error: #ef4444;
@@ -109,6 +110,7 @@
   --color-accent: var(--color-electric);
   --color-on-accent: var(--color-charcoal);
   --color-accent-hover: var(--color-electric-dark);
+  --color-accent-text: var(--color-electric);
 
   /* Text flips to light */
   --text-primary: var(--color-white);

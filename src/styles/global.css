@@ -187,7 +187,7 @@ p {
 
 /* Accent text — only on large/heading text (a11y contrast rule). */
 .text-accent {
-  color: var(--color-electric);
+  color: var(--color-accent-text);
 }
 
 .eyebrow {
@@ -196,7 +196,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: var(--text-small);
-  color: var(--color-electric-dark);
+  color: var(--color-accent-text);
 }
 
 /* Brand seismic-wave divider between sections. */

@@ -73,7 +73,14 @@ const steps = [
         </div>
       </div>
       <div class="hero__photo">
-        <img src="/img/ICBR_2.png" alt="Iván Bazaldúa" width="340" height="340" />
+        <img
+          src="/img/ICBR_2.png"
+          alt="Iván Bazaldúa"
+          width="340"
+          height="340"
+          fetchpriority="high"
+          decoding="async"
+        />
       </div>
     </div>
     <div class="hero__strata" aria-hidden="true"></div>
@@ -255,7 +262,7 @@ const steps = [
   }
   .area__methods {
     font-family: var(--font-heading);
-    color: var(--color-electric-dark);
+    color: var(--color-accent-text);
     font-size: var(--text-small);
     letter-spacing: 0.04em;
     margin-block: var(--space-2) var(--space-4);
@@ -265,7 +272,7 @@ const steps = [
     margin-top: var(--space-4);
     font-family: var(--font-heading);
     font-weight: var(--weight-heading-semibold);
-    color: var(--color-electric-dark);
+    color: var(--color-accent-text);
     text-transform: uppercase;
     font-size: var(--text-small);
   }
@@ -318,7 +325,7 @@ const steps = [
     font-family: var(--font-heading);
     font-weight: var(--weight-heading-bold);
     font-size: 2.5rem;
-    color: var(--color-electric);
+    color: var(--color-accent-text);
     line-height: 1;
   }
   .step h3 {

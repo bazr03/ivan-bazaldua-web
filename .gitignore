@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # design source assets (logo variants) — runtime copies live in public/img/
 /img/
+
+# private source material for anonymized public case studies
+casos_estudio/

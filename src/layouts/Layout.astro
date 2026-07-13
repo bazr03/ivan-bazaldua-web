@@ -40,7 +40,7 @@ const jsonLd = {
         availableLanguage: "Spanish",
         areaServed: "MX",
       },
-      sameAs: [],
+      sameAs: site.sameAs,
     },
     {
       "@type": "Person",
@@ -49,6 +49,7 @@ const jsonLd = {
       url: site.url,
       email: `mailto:${site.contact.email}`,
       telephone: site.contact.phoneDisplay,
+      sameAs: site.sameAs,
       knowsAbout: [
         "Geofísica aplicada",
         "Tomografía de resistividad eléctrica",
@@ -148,7 +149,7 @@ const breadcrumbJsonLd = showBreadcrumb
 
     <!-- PWA / mobile -->
     <meta name="theme-color" content="#00a8cc" />
-    <!-- apple-touch-icon: genera un ./apple-touch-icon.png real para producción -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
