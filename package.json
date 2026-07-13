@@ -8,6 +8,7 @@
     "start": "astro dev",
     "build": "astro build",
     "check:nav": "node scripts/check-nav-css.js",
+    "check:contact": "node scripts/check-contact-form.js",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types"

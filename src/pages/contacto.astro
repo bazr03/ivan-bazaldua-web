@@ -261,6 +261,8 @@ import { site, whatsappPrefill } from "../data/site.ts";
           form.reset();
           statusEl.textContent = "¡Mensaje enviado! Te responderé pronto.";
           statusEl.style.color = "var(--color-success, #2e7d32)";
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Enviar consulta";
         } else {
           throw new Error(data.error ?? "Error desconocido");
         }
