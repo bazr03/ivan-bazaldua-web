@@ -1,0 +1,309 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/Button.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+---
+
+<Layout
+  title="Tomografía de Resistividad Eléctrica (TRE) — Método geofísico | Iván Bazaldúa"
+  description="Qué es la Tomografía de Resistividad Eléctrica, cómo funciona, qué resuelve y qué puedes esperar de un estudio TRE para caracterización del subsuelo."
+>
+  <section class="section--soft page-head">
+    <div class="page-head__bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="150" r="4" fill="var(--color-electric)" opacity="0.4"/>
+        <circle cx="300" cy="150" r="40" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.2"/>
+        <circle cx="300" cy="150" r="80" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+        <circle cx="300" cy="150" r="120" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+        <circle cx="600" cy="100" r="4" fill="var(--color-electric)" opacity="0.4"/>
+        <circle cx="600" cy="100" r="40" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.2"/>
+        <circle cx="600" cy="100" r="80" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+        <circle cx="600" cy="100" r="120" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+        <circle cx="900" cy="180" r="4" fill="var(--color-electric)" opacity="0.4"/>
+        <circle cx="900" cy="180" r="40" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.2"/>
+        <circle cx="900" cy="180" r="80" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+        <circle cx="900" cy="180" r="120" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+        <line x1="300" y1="150" x2="600" y2="100" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+        <line x1="600" y1="100" x2="900" y2="180" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+        <line x1="300" y1="150" x2="900" y2="180" stroke="var(--color-electric)" stroke-width="0.3" opacity="0.1"/>
+      </svg>
+    </div>
+
+    <div class="container">
+      <p class="eyebrow">Método geofísico</p>
+      <h1>Tomografía de Resistividad Eléctrica (TRE)</h1>
+      <p class="page-head__lead">
+        Método eléctrico para investigar el subsuelo a partir de una propiedad física:
+        la resistividad eléctrica. Detecta humedad, cavidades, contactos geológicos y más,
+        sin necesidad de excavar.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="prose">
+
+        <p>
+          La <strong>Tomografía de Resistividad Eléctrica</strong>, también conocida como
+          <strong>TRE</strong> o <strong>ERT</strong> por sus siglas en inglés
+          (<em>Electrical Resistivity Tomography</em>), es un método geofísico que permite
+          investigar el subsuelo a partir de una propiedad física: la
+          <strong>resistividad eléctrica</strong>.
+        </p>
+        <p>
+          En términos simples, la TRE ayuda a responder una pregunta clave:
+          <strong>¿qué tan fácil o difícil es que la corriente eléctrica atraviese los
+          materiales del subsuelo?</strong> Esa respuesta puede revelar cambios asociados
+          con humedad, arcillas, roca sana, roca fracturada, rellenos, cavidades,
+          contaminación, contactos geológicos o variaciones litológicas.
+        </p>
+
+        <figure class="figure">
+          <img src="/img/metodos/tre_principio_medicion.svg" alt="Principio de medición de una TRE" loading="lazy" decoding="async" />
+          <figcaption>Principio de medición de una TRE</figcaption>
+        </figure>
+
+        <h2>Principio físico: corriente, voltaje y resistividad</h2>
+        <p>
+          Durante una TRE se colocan electrodos sobre el terreno. Algunos electrodos se
+          usan para <strong>inyectar corriente eléctrica</strong> y otros para
+          <strong>medir una diferencia de potencial</strong>. Con esos datos se calcula
+          una resistividad aparente:
+        </p>
+        <p class="formula">ρa = K · ΔV / I</p>
+        <p>Donde:</p>
+        <ul>
+          <li><strong>ρa</strong> = resistividad aparente.</li>
+          <li><strong>K</strong> = factor geométrico, que depende del arreglo y espaciamiento de electrodos.</li>
+          <li><strong>ΔV</strong> = diferencia de potencial medida.</li>
+          <li><strong>I</strong> = corriente inyectada.</li>
+        </ul>
+        <p>
+          La resistividad se expresa comúnmente en <strong>ohm·m</strong>. Materiales con
+          agua, arcillas o sales disueltas tienden a mostrar valores más bajos. Materiales
+          secos, compactos o rocosos suelen presentar valores más altos, aunque la
+          interpretación siempre depende del contexto geológico.
+        </p>
+
+        <h2>¿Por qué se llama "tomografía"?</h2>
+        <p>
+          Se le llama tomografía porque no se obtiene una sola medición puntual, sino
+          muchas mediciones con diferentes combinaciones de electrodos. El equipo cambia
+          automáticamente los electrodos de corriente y potencial, generando una gran
+          cantidad de datos a distintas profundidades aparentes.
+        </p>
+        <p>
+          Después, esos datos se procesan mediante <strong>inversión numérica</strong> para
+          construir un modelo 2D o 3D de resistividad del subsuelo.
+        </p>
+
+        <figure class="figure">
+          <img src="/img/metodos/tre_inversion_2d.svg" alt="Proceso de adquisición e inversión 2D en TRE" loading="lazy" decoding="async" />
+          <figcaption>Proceso de adquisición e inversión 2D en TRE</figcaption>
+        </figure>
+
+        <p class="callout">
+          Es importante aclarar: la TRE no produce una "fotografía directa" del subsuelo.
+          Produce un <strong>modelo geofísico interpretado</strong>. Por eso debe analizarse
+          junto con información geológica, topográfica, geotécnica o hidrogeológica.
+        </p>
+
+        <h2>¿Qué información puede aportar una TRE?</h2>
+        <p>Una TRE puede ser útil para identificar contrastes de resistividad asociados con:</p>
+        <ul>
+          <li>Zonas saturadas o cambios en el nivel freático.</li>
+          <li>Filtraciones o trayectorias preferenciales de flujo.</li>
+          <li>Contactos entre suelo, roca alterada y roca más competente.</li>
+          <li>Espesores de relleno o material removido.</li>
+          <li>Arcillas o materiales finos de baja resistividad.</li>
+          <li>Fracturas, fallas o zonas de debilidad.</li>
+          <li>Cavidades, huecos o zonas anómalas.</li>
+          <li>Plumas de contaminación, cuando existe contraste eléctrico suficiente.</li>
+          <li>Condiciones que pueden influir en estabilidad de taludes, cimentaciones u obras subterráneas.</li>
+        </ul>
+
+        <figure class="figure">
+          <img src="/img/metodos/tre_aplicaciones.svg" alt="Aplicaciones típicas de la TRE" loading="lazy" decoding="async" />
+          <figcaption>Aplicaciones típicas de la TRE</figcaption>
+        </figure>
+
+        <h2>Aplicaciones comunes</h2>
+
+        <h3>Estudios geotécnicos</h3>
+        <p>
+          En ingeniería civil, la TRE puede apoyar la caracterización del terreno antes de
+          construir. Puede ayudar a delimitar espesores de suelo, zonas de relleno, roca
+          alterada, contactos litológicos o áreas con humedad elevada.
+        </p>
+
+        <h3>Hidrogeología</h3>
+        <p>
+          Es especialmente útil para estudiar zonas saturadas, acuíferos someros,
+          filtraciones, variaciones laterales de humedad y posibles trayectorias de
+          flujo subterráneo.
+        </p>
+
+        <h3>Estabilidad de taludes</h3>
+        <p>
+          En taludes, laderas o cortes, la TRE puede aportar información sobre zonas
+          saturadas, discontinuidades conductivas, contactos entre materiales y sectores
+          con alteración. Esto ayuda a construir un modelo geológico-geotécnico más robusto.
+        </p>
+
+        <h3>Medio ambiente</h3>
+        <p>
+          En algunos casos se utiliza para delimitar plumas contaminantes, lixiviados o
+          zonas con alta concentración de sales disueltas, siempre que exista contraste
+          eléctrico medible.
+        </p>
+
+        <h3>Detección de cavidades o anomalías</h3>
+        <p>
+          Cuando el contraste es favorable, la TRE puede apoyar en la identificación de
+          cavidades, huecos, rellenos sueltos o zonas anómalas bajo la superficie.
+        </p>
+
+        <h2>Ventajas de la TRE</h2>
+        <ul>
+          <li>Es un método <strong>no destructivo</strong>.</li>
+          <li>Permite investigar el subsuelo de forma continua a lo largo de un perfil.</li>
+          <li>Puede alcanzar distintas profundidades según el espaciamiento de electrodos y las condiciones del terreno.</li>
+          <li>Es útil en suelos, roca alterada, zonas urbanas, taludes y estudios hidrogeológicos.</li>
+          <li>Complementa sondeos, calicatas, ensayos geotécnicos y levantamientos geológicos.</li>
+        </ul>
+
+        <h2>Limitaciones importantes</h2>
+        <p>Como todo método geofísico, la TRE tiene limitaciones:</p>
+        <ul>
+          <li>La profundidad de investigación depende de la longitud del perfil y del espaciamiento de electrodos.</li>
+          <li>La resolución disminuye con la profundidad.</li>
+          <li>Dos materiales distintos pueden tener resistividades similares.</li>
+          <li>La presencia de infraestructura metálica, tuberías, cables o ruido eléctrico puede afectar los datos.</li>
+          <li>La interpretación requiere calibración con información directa cuando sea posible.</li>
+        </ul>
+        <p>
+          Por eso, una TRE debe entenderse como parte de un <strong>modelo integrado
+          del subsuelo</strong>, no como una respuesta aislada.
+        </p>
+
+        <h2>¿Cómo se interpreta una sección de resistividad?</h2>
+        <p>En una sección de TRE, los colores representan rangos de resistividad. Generalmente:</p>
+        <ul>
+          <li>Colores asociados a baja resistividad pueden indicar arcillas, humedad, agua con sales, rellenos finos o zonas conductivas.</li>
+          <li>Colores asociados a alta resistividad pueden indicar roca más competente, materiales secos, gravas, bloques o cavidades, dependiendo del caso.</li>
+        </ul>
+        <p>
+          La clave no está solo en ver colores, sino en relacionar los contrastes con la
+          geología, la topografía, los objetivos del estudio y los datos de campo.
+        </p>
+
+        <h2>Conclusión</h2>
+        <p>
+          La <strong>Tomografía de Resistividad Eléctrica</strong> es una herramienta geofísica
+          poderosa para visualizar contrastes del subsuelo de manera indirecta, continua y no
+          destructiva. Su mayor valor aparece cuando se integra con geología, geotecnia,
+          hidrogeología y experiencia de campo.
+        </p>
+        <p>
+          Bien aplicada, una TRE puede reducir incertidumbre, orientar perforaciones, mejorar
+          modelos geológico-geotécnicos y apoyar decisiones en proyectos de ingeniería, agua
+          subterránea, estabilidad de taludes y evaluación ambiental.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    heading="¿Necesitas un estudio TRE para tu proyecto?"
+    text="Cuéntame qué necesitas investigar y te confirmo si la TRE es el método adecuado."
+  />
+</Layout>
+
+<style>
+  .page-head {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-24) var(--space-16);
+  }
+  .page-head__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .page-head__bg svg {
+    width: 100%;
+    height: 100%;
+  }
+  .page-head > .container {
+    position: relative;
+    z-index: 1;
+  }
+  .page-head__lead {
+    max-width: 60ch;
+    margin-top: var(--space-4);
+    font-size: 1.125rem;
+    color: var(--text-primary);
+  }
+  .container--narrow {
+    max-width: 720px;
+  }
+  .prose {
+    line-height: 1.8;
+  }
+  .prose h2 {
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-4);
+  }
+  .prose h3 {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+  .prose p {
+    margin-bottom: var(--space-4);
+    color: var(--text-secondary);
+  }
+  .prose ul {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-6);
+    color: var(--text-secondary);
+  }
+  .prose li {
+    margin-bottom: var(--space-2);
+  }
+  .prose strong {
+    color: var(--text-primary);
+  }
+  .formula {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    margin-block: var(--space-6);
+  }
+  .figure {
+    margin-block: var(--space-8);
+    text-align: center;
+  }
+  .figure img {
+    max-width: 100%;
+    border-radius: var(--radius-md);
+  }
+  .figure figcaption {
+    margin-top: var(--space-3);
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .callout {
+    padding: var(--space-6);
+    border-left: 4px solid var(--color-electric);
+    background: var(--color-surface);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-block: var(--space-8);
+  }
+</style>

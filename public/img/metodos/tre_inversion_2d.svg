@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <rect width="1400" height="900" fill="#f8fafc"/>
+  <text x="70" y="80" font-family="Arial" font-size="40" font-weight="700" fill="#1f2937">De mediciones en superficie a un modelo 2D del subsuelo</text>
+  <text x="70" y="125" font-family="Arial" font-size="24" fill="#6b7280">La TRE mide resistividades aparentes y las transforma mediante inversión numérica.</text>
+  <text x="100" y="175" font-family="Arial" font-size="22" font-weight="700" fill="#1f2937">1) Perfil de electrodos en campo</text>
+  <line x1="100" y1="230" x2="1300" y2="230" stroke="#475569" stroke-width="4"/>
+  <g fill="#1f2937"><circle cx="140" cy="230" r="8"/><circle cx="220" cy="230" r="8"/><circle cx="300" cy="230" r="8"/><circle cx="380" cy="230" r="8"/><circle cx="460" cy="230" r="8"/><circle cx="540" cy="230" r="8"/><circle cx="620" cy="230" r="8"/><circle cx="700" cy="230" r="8"/><circle cx="780" cy="230" r="8"/><circle cx="860" cy="230" r="8"/><circle cx="940" cy="230" r="8"/><circle cx="1020" cy="230" r="8"/><circle cx="1100" cy="230" r="8"/><circle cx="1180" cy="230" r="8"/><circle cx="1260" cy="230" r="8"/></g>
+  <text x="100" y="305" font-family="Arial" font-size="22" font-weight="700" fill="#1f2937">2) Pseudosección de resistividades aparentes</text>
+  <g opacity="0.95">
+    <circle cx="220" cy="350" r="11" fill="#2563eb"/><circle cx="330" cy="350" r="11" fill="#0ea5e9"/><circle cx="440" cy="350" r="11" fill="#22c55e"/><circle cx="550" cy="350" r="11" fill="#f97316"/><circle cx="660" cy="350" r="11" fill="#dc2626"/><circle cx="770" cy="350" r="11" fill="#2563eb"/><circle cx="880" cy="350" r="11" fill="#0ea5e9"/><circle cx="990" cy="350" r="11" fill="#22c55e"/><circle cx="1100" cy="350" r="11" fill="#f97316"/>
+    <circle cx="280" cy="395" r="11" fill="#0ea5e9"/><circle cx="405" cy="395" r="11" fill="#22c55e"/><circle cx="530" cy="395" r="11" fill="#f97316"/><circle cx="655" cy="395" r="11" fill="#dc2626"/><circle cx="780" cy="395" r="11" fill="#2563eb"/><circle cx="905" cy="395" r="11" fill="#0ea5e9"/><circle cx="1030" cy="395" r="11" fill="#22c55e"/>
+    <circle cx="340" cy="440" r="11" fill="#22c55e"/><circle cx="490" cy="440" r="11" fill="#f97316"/><circle cx="640" cy="440" r="11" fill="#dc2626"/><circle cx="790" cy="440" r="11" fill="#2563eb"/><circle cx="940" cy="440" r="11" fill="#0ea5e9"/>
+    <circle cx="420" cy="485" r="11" fill="#f97316"/><circle cx="585" cy="485" r="11" fill="#dc2626"/><circle cx="750" cy="485" r="11" fill="#2563eb"/><circle cx="915" cy="485" r="11" fill="#0ea5e9"/>
+    <circle cx="510" cy="530" r="11" fill="#dc2626"/><circle cx="700" cy="530" r="11" fill="#2563eb"/><circle cx="890" cy="530" r="11" fill="#22c55e"/>
+  </g>
+  <line x1="700" y1="600" x2="700" y2="690" stroke="#6b7280" stroke-width="4"/><polygon points="700,720 680,690 720,690" fill="#6b7280"/><text x="760" y="665" font-family="Arial" font-size="22" font-weight="700" fill="#6b7280">inversión numérica</text>
+  <text x="100" y="710" font-family="Arial" font-size="22" font-weight="700" fill="#1f2937">3) Modelo interpretado de resistividad real del subsuelo</text>
+  <polygon points="120,735 1280,735 1280,775 120,790" fill="#dcfce7"/><polygon points="120,790 540,760 760,800 1280,775 1280,835 120,835" fill="#bfdbfe"/><polygon points="120,835 1280,835 1280,860 120,860" fill="#ffedd5"/><rect x="120" y="735" width="1160" height="125" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <ellipse cx="530" cy="820" rx="110" ry="35" fill="#60a5fa" stroke="#2563eb" stroke-width="2"/><text x="455" y="825" font-family="Arial" font-size="18" fill="#1f2937">arcillas / agua</text>
+  <ellipse cx="1010" cy="822" rx="120" ry="35" fill="#fdba74" stroke="#ea580c" stroke-width="2"/><text x="935" y="827" font-family="Arial" font-size="18" fill="#1f2937">roca más sana</text>
+</svg>

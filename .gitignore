@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # private source material for anonymized public case studies
 casos_estudio/
+
+# artículos drafts
+articulos/

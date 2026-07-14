@@ -9,13 +9,16 @@ interface Props {
   solves: string;
   forWhom: string;
   delivers: string;
+  href?: string;
 }
-const { name, methods, solves, forWhom, delivers } = Astro.props;
+const { name, methods, solves, forWhom, delivers, href } = Astro.props;
 ---
 
 <article class="card">
   <header class="card__head">
-    <h3 class="card__title">{name}</h3>
+    <h3 class="card__title">
+      {href ? <a href={href}>{name}</a> : name}
+    </h3>
     {methods && <p class="card__methods">{methods}</p>}
   </header>
   <dl class="card__body">
@@ -53,6 +56,14 @@ const { name, methods, solves, forWhom, delivers } = Astro.props;
   }
   .card__title {
     color: var(--text-primary);
+  }
+  .card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .card__title a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
   }
   .card__methods {
     margin-top: var(--space-2);
