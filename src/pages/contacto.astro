@@ -8,6 +8,30 @@ import { site, whatsappPrefill } from "../data/site.ts";
   description="Cuéntame tu proyecto y te propongo el estudio geofísico adecuado. Contacto por formulario, correo o WhatsApp."
 >
   <section class="section--soft page-head">
+    <!-- Seismic wave source background -->
+    <div class="page-head__bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shot point source -->
+        <circle cx="600" cy="0" r="5" fill="var(--color-electric)" opacity="0.5"/>
+        <circle cx="600" cy="0" r="10" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.3"/>
+        <!-- Ondas de refracción sísmica (frentes de onda) -->
+        <path d="M600,0 Q750,40 900,0" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.25"/>
+        <path d="M600,0 Q780,60 960,0" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.2"/>
+        <path d="M600,0 Q810,80 1020,0" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.15"/>
+        <path d="M600,0 Q840,100 1080,0" stroke="var(--color-electric)" stroke-width="0.8" fill="none" opacity="0.1"/>
+        <path d="M600,0 Q870,120 1140,0" stroke="var(--color-electric)" stroke-width="0.8" fill="none" opacity="0.08"/>
+        <path d="M600,0 Q450,40 300,0" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.25"/>
+        <path d="M600,0 Q420,60 240,0" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.2"/>
+        <path d="M600,0 Q390,80 180,0" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.15"/>
+        <path d="M600,0 Q360,100 120,0" stroke="var(--color-electric)" stroke-width="0.8" fill="none" opacity="0.1"/>
+        <path d="M600,0 Q330,120 60,0" stroke="var(--color-electric)" stroke-width="0.8" fill="none" opacity="0.08"/>
+        <!-- Ondas hacia abajo (subsuelo) -->
+        <path d="M600,0 Q650,50 600,100 Q550,150 600,200" stroke="var(--color-electric)" stroke-width="0.8" fill="none" opacity="0.12"/>
+        <path d="M600,0 Q680,70 620,140 Q560,200 620,260" stroke="var(--color-electric)" stroke-width="0.6" fill="none" opacity="0.1"/>
+        <path d="M600,0 Q520,70 580,140 Q640,200 580,260" stroke="var(--color-electric)" stroke-width="0.6" fill="none" opacity="0.1"/>
+      </svg>
+    </div>
+
     <div class="container">
       <p class="eyebrow">Contacto</p>
       <h1>Contacto</h1>
@@ -91,7 +115,23 @@ import { site, whatsappPrefill } from "../data/site.ts";
 
 <style>
   .page-head {
+    position: relative;
+    overflow: hidden;
     padding-block: var(--space-24) var(--space-16);
+  }
+  .page-head__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .page-head__bg svg {
+    width: 100%;
+    height: 100%;
+  }
+  .page-head > .container {
+    position: relative;
+    z-index: 1;
   }
   .page-head__lead {
     max-width: 56ch;

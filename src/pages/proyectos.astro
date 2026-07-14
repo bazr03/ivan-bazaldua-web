@@ -44,6 +44,48 @@ const hasProjects = projects.length > 0 || caseStudies.length > 0;
   description="Casos de estudio de estudios geofísicos en obra civil, minería y agua subterránea: problema, método aplicado y resultado."
 >
   <section class="section--soft page-head">
+    <!-- Survey network background -->
+    <div class="page-head__bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <!-- Líneas de conexión -->
+        <g class="connections">
+          <line x1="100" y1="80" x2="250" y2="120" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+          <line x1="250" y1="120" x2="400" y2="90" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.12"/>
+          <line x1="400" y1="90" x2="550" y2="140" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+          <line x1="550" y1="140" x2="700" y2="100" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.12"/>
+          <line x1="700" y1="100" x2="850" y2="160" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+          <line x1="850" y1="160" x2="1000" y2="130" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.12"/>
+          <line x1="1000" y1="130" x2="1100" y2="180" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+          <line x1="250" y1="120" x2="300" y2="200" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+          <line x1="550" y1="140" x2="600" y2="220" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+          <line x1="850" y1="160" x2="900" y2="240" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+          <line x1="100" y1="80" x2="200" y2="40" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+          <line x1="400" y1="90" x2="480" y2="50" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+          <line x1="700" y1="100" x2="780" y2="60" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+          <line x1="1100" y1="180" x2="1150" y2="140" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.1"/>
+        </g>
+        <!-- Puntos de estación -->
+        <g class="stations">
+          <circle class="station" cx="100" cy="80" r="3" fill="var(--color-electric)" opacity="0.3"/>
+          <circle class="station" cx="250" cy="120" r="4" fill="var(--color-electric)" opacity="0.4"/>
+          <circle class="station" cx="400" cy="90" r="3" fill="var(--color-electric)" opacity="0.3"/>
+          <circle class="station" cx="550" cy="140" r="4" fill="var(--color-electric)" opacity="0.4"/>
+          <circle class="station" cx="700" cy="100" r="3" fill="var(--color-electric)" opacity="0.3"/>
+          <circle class="station" cx="850" cy="160" r="4" fill="var(--color-electric)" opacity="0.4"/>
+          <circle class="station" cx="1000" cy="130" r="3" fill="var(--color-electric)" opacity="0.3"/>
+          <circle class="station" cx="1100" cy="180" r="4" fill="var(--color-electric)" opacity="0.4"/>
+          <!-- Puntos intermedios -->
+          <circle class="station" cx="200" cy="40" r="2" fill="var(--color-electric)" opacity="0.2"/>
+          <circle class="station" cx="300" cy="200" r="2" fill="var(--color-electric)" opacity="0.2"/>
+          <circle class="station" cx="480" cy="50" r="2" fill="var(--color-electric)" opacity="0.2"/>
+          <circle class="station" cx="600" cy="220" r="2" fill="var(--color-electric)" opacity="0.2"/>
+          <circle class="station" cx="780" cy="60" r="2" fill="var(--color-electric)" opacity="0.2"/>
+          <circle class="station" cx="900" cy="240" r="2" fill="var(--color-electric)" opacity="0.2"/>
+          <circle class="station" cx="1150" cy="140" r="2" fill="var(--color-electric)" opacity="0.2"/>
+        </g>
+      </svg>
+    </div>
+
     <div class="container">
       <p class="eyebrow">Proyectos</p>
       <h1>Proyectos</h1>
@@ -119,12 +161,44 @@ const hasProjects = projects.length > 0 || caseStudies.length > 0;
 
 <style>
   .page-head {
+    position: relative;
+    overflow: hidden;
     padding-block: var(--space-24) var(--space-16);
+  }
+  .page-head__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .page-head__bg svg {
+    width: 100%;
+    height: 100%;
+  }
+  .page-head > .container {
+    position: relative;
+    z-index: 1;
   }
   .page-head__lead {
     max-width: 60ch;
     margin-top: var(--space-4);
     font-size: 1.125rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .station {
+      animation: stationPulse 3s ease-in-out infinite;
+    }
+    .station:nth-child(2) { animation-delay: 0.3s; }
+    .station:nth-child(3) { animation-delay: 0.6s; }
+    .station:nth-child(4) { animation-delay: 0.9s; }
+    .station:nth-child(5) { animation-delay: 1.2s; }
+    .station:nth-child(6) { animation-delay: 1.5s; }
+    .station:nth-child(7) { animation-delay: 1.8s; }
+    .station:nth-child(8) { animation-delay: 2.1s; }
+    @keyframes stationPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
   }
   .project-grid {
     display: grid;

@@ -64,6 +64,44 @@ const year = new Date().getFullYear();
     </div>
   </div>
 
+  <!-- Seismic wave art — waves propagating through geological strata -->
+  <div class="footer__art" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Estratos geológicos (capas) -->
+      <rect x="0" y="0" width="1200" height="20" fill="#2a2a2e" opacity="0.6"/>
+      <rect x="0" y="20" width="1200" height="18" fill="#363639" opacity="0.5"/>
+      <rect x="0" y="38" width="1200" height="22" fill="#252528" opacity="0.55"/>
+      <rect x="0" y="60" width="1200" height="20" fill="#1e1e21" opacity="0.5"/>
+      <rect x="0" y="80" width="1200" height="25" fill="#2d2d30" opacity="0.45"/>
+      <rect x="0" y="105" width="1200" height="15" fill="#1a1a1d" opacity="0.4"/>
+
+      <!-- Ondas sísmicas — capa superficial -->
+      <path class="wave w1" d="M0,12 Q30,6 60,12 Q90,18 120,12 Q150,6 180,12 Q210,18 240,12 Q270,6 300,12 Q330,18 360,12 Q390,6 420,12 Q450,18 480,12 Q510,6 540,12 Q570,18 600,12 Q630,6 660,12 Q690,18 720,12 Q750,6 780,12 Q810,18 840,12 Q870,6 900,12 Q930,18 960,12 Q990,6 1020,12 Q1050,18 1080,12 Q1110,6 1140,12 Q1170,18 1200,12"
+        stroke="#00A8CC" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+      <!-- Ondas sísmicas — capa 2 -->
+      <path class="wave w2" d="M0,32 Q40,24 80,32 Q120,40 160,32 Q200,24 240,32 Q280,40 320,32 Q360,24 400,32 Q440,40 480,32 Q520,24 560,32 Q600,40 640,32 Q680,24 720,32 Q760,40 800,32 Q840,24 880,32 Q920,40 960,32 Q1000,24 1040,32 Q1080,40 1120,32 Q1160,24 1200,32"
+        stroke="#00A8CC" stroke-width="1.2" fill="none" opacity="0.5"/>
+
+      <!-- Ondas sísmicas — capa 3 -->
+      <path class="wave w3" d="M0,52 Q50,42 100,52 Q150,62 200,52 Q250,42 300,52 Q350,62 400,52 Q450,42 500,52 Q550,62 600,52 Q650,42 700,52 Q750,62 800,52 Q850,42 900,52 Q950,62 1000,52 Q1050,42 1100,52 Q1150,62 1200,52"
+        stroke="#00A8CC" stroke-width="1" fill="none" opacity="0.35"/>
+
+      <!-- Ondas sísmicas — capa 4 (más profundas) -->
+      <path class="wave w4" d="M0,72 Q60,60 120,72 Q180,84 240,72 Q300,60 360,72 Q420,84 480,72 Q540,60 600,72 Q660,84 720,72 Q780,60 840,72 Q900,84 960,72 Q1020,60 1080,72 Q1140,84 1200,72"
+        stroke="#00A8CC" stroke-width="0.8" fill="none" opacity="0.25"/>
+
+      <!-- Ondas sísmicas — capa 5 -->
+      <path class="wave w5" d="M0,92 Q70,78 140,92 Q210,106 280,92 Q350,78 420,92 Q490,106 560,92 Q630,78 700,92 Q770,106 840,92 Q910,78 980,92 Q1050,106 1120,92 Q1190,78 1200,85"
+        stroke="#00A8CC" stroke-width="0.6" fill="none" opacity="0.18"/>
+
+      <!-- Fuente sísmica (shot point) — punto de origen de las ondas -->
+      <circle cx="600" cy="0" r="4" fill="#00A8CC" opacity="0.8"/>
+      <circle cx="600" cy="0" r="8" fill="none" stroke="#00A8CC" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="600" cy="0" r="14" fill="none" stroke="#00A8CC" stroke-width="0.5" opacity="0.2"/>
+    </svg>
+  </div>
+
   <div class="footer__bottom">
     <div class="container">
       <p>&copy; {year} Iván Bazaldúa. Todos los derechos reservados.</p>
@@ -81,7 +119,7 @@ const year = new Date().getFullYear();
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: var(--space-12);
-    padding-block: var(--space-16);
+    padding-block: var(--space-16) var(--space-8);
   }
   .footer__logo {
     display: inline-block;
@@ -142,6 +180,30 @@ const year = new Date().getFullYear();
     padding-block: var(--space-6);
     text-align: center;
     color: var(--color-grey);
+  }
+  .footer__art {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .footer__art svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .wave {
+      animation: wavePropagate 6s ease-in-out infinite;
+    }
+    .w1 { animation-delay: 0s; }
+    .w2 { animation-delay: 0.4s; }
+    .w3 { animation-delay: 0.8s; }
+    .w4 { animation-delay: 1.2s; }
+    .w5 { animation-delay: 1.6s; }
+    @keyframes wavePropagate {
+      0%, 100% { opacity: inherit; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(-8px); }
+    }
   }
   @media (max-width: 720px) {
     .footer__inner {

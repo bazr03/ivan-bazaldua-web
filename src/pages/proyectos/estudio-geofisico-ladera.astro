@@ -104,24 +104,24 @@ const caseStudyJsonLd = {
       <circle cx="440" cy="180" r="32" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
 
       <!-- Líneas de campo: arcos entre electrodos -->
-      <path class="field-line" d="M80,180 Q260,40 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.55"/>
-      <path class="field-line" d="M80,180 Q260,75 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.45"/>
-      <path class="field-line" d="M80,180 Q260,110 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.38"/>
-      <path class="field-line" d="M80,180 Q260,145 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.32"/>
-      <path class="field-line" d="M80,180 Q260,180 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.65"/>
-      <path class="field-line" d="M80,180 Q260,215 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.32"/>
-      <path class="field-line" d="M80,180 Q260,250 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.38"/>
-      <path class="field-line" d="M80,180 Q260,285 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.45"/>
-      <path class="field-line" d="M80,180 Q260,320 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.55"/>
+      <path class="field-line" d="M80,180 Q260,40 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.55" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,75 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.45" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,110 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.38" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,145 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.32" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,180 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.65" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,215 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.32" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,250 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.38" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,285 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.45" stroke-dasharray="8 4"/>
+      <path class="field-line" d="M80,180 Q260,320 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.55" stroke-dasharray="8 4"/>
 
       <!-- Líneas profundas hacia abajo (corrientes subsuperficiales) -->
-      <path class="field-line" d="M80,180 Q50,260 20,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.22"/>
-      <path class="field-line" d="M80,180 Q70,260 55,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.18"/>
-      <path class="field-line" d="M80,180 Q90,260 85,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.14"/>
+      <path class="field-line" d="M80,180 Q50,260 20,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.22" stroke-dasharray="6 3"/>
+      <path class="field-line" d="M80,180 Q70,260 55,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.18" stroke-dasharray="6 3"/>
+      <path class="field-line" d="M80,180 Q90,260 85,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.14" stroke-dasharray="6 3"/>
 
-      <path class="field-line" d="M440,180 Q470,260 500,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.22"/>
-      <path class="field-line" d="M440,180 Q450,260 465,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.18"/>
-      <path class="field-line" d="M440,180 Q430,260 435,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.14"/>
+      <path class="field-line" d="M440,180 Q470,260 500,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.22" stroke-dasharray="6 3"/>
+      <path class="field-line" d="M440,180 Q450,260 465,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.18" stroke-dasharray="6 3"/>
+      <path class="field-line" d="M440,180 Q430,260 435,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.14" stroke-dasharray="6 3"/>
     </svg>
 
     <div class="container page-head__grid">
@@ -216,6 +216,33 @@ const caseStudyJsonLd = {
     </div>
   </section>
 
+  <div class="circuit-divider" aria-hidden="true">
+    <svg viewBox="0 0 800 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Línea principal horizontal -->
+      <line x1="0" y1="20" x2="800" y2="20" stroke="var(--color-electric)" stroke-width="1" opacity="0.2"/>
+      <!-- Trazos PCB en ángulo -->
+      <path d="M100 20 L130 20 L145 8 L200 8" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.35"/>
+      <path d="M200 8 L215 8 L230 20 L280 20" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.35"/>
+      <path d="M280 20 L310 20 L325 35 L400 35" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.35"/>
+      <path d="M400 35 L415 35 L430 20 L480 20" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.35"/>
+      <path d="M480 20 L510 20 L525 5 L580 5" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.35"/>
+      <path d="M580 5 L595 5 L610 20 L660 20" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.35"/>
+      <path d="M660 20 L690 20 L710 32 L800 32" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.35"/>
+      <!-- Nodos -->
+      <circle cx="200" cy="8" r="3" fill="var(--color-electric)" opacity="0.5"/>
+      <circle cx="280" cy="20" r="3" fill="var(--color-electric)" opacity="0.5"/>
+      <circle cx="400" cy="35" r="3" fill="var(--color-electric)" opacity="0.5"/>
+      <circle cx="480" cy="20" r="3" fill="var(--color-electric)" opacity="0.5"/>
+      <circle cx="580" cy="5" r="3" fill="var(--color-electric)" opacity="0.5"/>
+      <circle cx="660" cy="20" r="3" fill="var(--color-electric)" opacity="0.5"/>
+      <!-- Puntos de conexión en línea principal -->
+      <circle cx="100" cy="20" r="2" fill="var(--color-electric)" opacity="0.3"/>
+      <circle cx="310" cy="20" r="2" fill="var(--color-electric)" opacity="0.3"/>
+      <circle cx="525" cy="20" r="2" fill="var(--color-electric)" opacity="0.3"/>
+      <circle cx="710" cy="32" r="2" fill="var(--color-electric)" opacity="0.3"/>
+    </svg>
+  </div>
+
   <section class="section section--soft">
     <div class="container">
       <div class="section__header">
@@ -307,29 +334,35 @@ const caseStudyJsonLd = {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 70% 90% at 85% 50%, rgba(0,168,204,0.09) 0%, transparent 65%),
-      radial-gradient(ellipse 50% 70% at 15% 50%, rgba(0,80,120,0.06) 0%, transparent 55%);
+      radial-gradient(ellipse 80% 90% at 50% 50%, rgba(0,168,204,0.12) 0%, transparent 70%);
     z-index: 0;
     pointer-events: none;
   }
   .page-head__field-art {
     position: absolute;
-    right: -6%;
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
-    width: clamp(280px, 42vw, 520px);
+    transform: translate(-50%, -50%);
+    width: min(90vw, 900px);
     height: auto;
-    opacity: 0.13;
+    opacity: 0.11;
     z-index: 1;
     pointer-events: none;
   }
   @media (prefers-reduced-motion: no-preference) {
-    .field-line {
-      animation: fieldPulse 5s ease-in-out infinite;
+    .page-head::before {
+      animation: breathingGlow 8s ease-in-out infinite;
     }
-    @keyframes fieldPulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.7; }
+    @keyframes breathingGlow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .field-line {
+      animation: fieldFlow 4s linear infinite;
+    }
+    @keyframes fieldFlow {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -40; }
     }
   }
   .page-head__grid,
@@ -454,6 +487,17 @@ const caseStudyJsonLd = {
   .privacy p {
     margin-top: var(--space-4);
     max-width: 72ch;
+  }
+  .circuit-divider {
+    display: flex;
+    justify-content: center;
+    padding-block: var(--space-4);
+    overflow: hidden;
+  }
+  .circuit-divider svg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
   @media (max-width: 760px) {
     .page-head__grid,
