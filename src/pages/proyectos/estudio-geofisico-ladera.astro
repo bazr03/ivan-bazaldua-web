@@ -85,6 +85,45 @@ const caseStudyJsonLd = {
   ogType="article"
 >
   <section class="section--soft page-head">
+    <!-- Electric field background art — TRE visualization -->
+    <svg
+      class="page-head__field-art"
+      viewBox="0 0 520 360"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <!-- Electrodo izquierdo -->
+      <circle cx="80" cy="180" r="14" fill="var(--color-electric)" opacity="0.7"/>
+      <circle cx="80" cy="180" r="22" fill="none" stroke="var(--color-electric)" stroke-width="1" opacity="0.25"/>
+      <circle cx="80" cy="180" r="32" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+
+      <!-- Electrodo derecho -->
+      <circle cx="440" cy="180" r="14" fill="var(--color-electric)" opacity="0.7"/>
+      <circle cx="440" cy="180" r="22" fill="none" stroke="var(--color-electric)" stroke-width="1" opacity="0.25"/>
+      <circle cx="440" cy="180" r="32" fill="none" stroke="var(--color-electric)" stroke-width="0.5" opacity="0.15"/>
+
+      <!-- Líneas de campo: arcos entre electrodos -->
+      <path class="field-line" d="M80,180 Q260,40 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.55"/>
+      <path class="field-line" d="M80,180 Q260,75 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.45"/>
+      <path class="field-line" d="M80,180 Q260,110 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.38"/>
+      <path class="field-line" d="M80,180 Q260,145 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.32"/>
+      <path class="field-line" d="M80,180 Q260,180 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.65"/>
+      <path class="field-line" d="M80,180 Q260,215 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.32"/>
+      <path class="field-line" d="M80,180 Q260,250 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.38"/>
+      <path class="field-line" d="M80,180 Q260,285 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.45"/>
+      <path class="field-line" d="M80,180 Q260,320 440,180" stroke="var(--color-electric)" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+      <!-- Líneas profundas hacia abajo (corrientes subsuperficiales) -->
+      <path class="field-line" d="M80,180 Q50,260 20,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.22"/>
+      <path class="field-line" d="M80,180 Q70,260 55,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.18"/>
+      <path class="field-line" d="M80,180 Q90,260 85,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.14"/>
+
+      <path class="field-line" d="M440,180 Q470,260 500,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.22"/>
+      <path class="field-line" d="M440,180 Q450,260 465,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.18"/>
+      <path class="field-line" d="M440,180 Q430,260 435,340" stroke="var(--color-electric)" stroke-width="1" fill="none" opacity="0.14"/>
+    </svg>
+
     <div class="container page-head__grid">
       <div>
         <nav class="breadcrumbs" aria-label="Ruta de navegación">
@@ -259,7 +298,39 @@ const caseStudyJsonLd = {
 
 <style>
   .page-head {
+    position: relative;
+    overflow: hidden;
     padding-block: var(--space-24) var(--space-16);
+  }
+  .page-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 90% at 85% 50%, rgba(0,168,204,0.09) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 70% at 15% 50%, rgba(0,80,120,0.06) 0%, transparent 55%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .page-head__field-art {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(280px, 42vw, 520px);
+    height: auto;
+    opacity: 0.13;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .field-line {
+      animation: fieldPulse 5s ease-in-out infinite;
+    }
+    @keyframes fieldPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
   }
   .page-head__grid,
   .content-grid {
@@ -267,6 +338,8 @@ const caseStudyJsonLd = {
     grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
     gap: var(--space-12);
     align-items: start;
+    position: relative;
+    z-index: 2;
   }
   .page-head__lead {
     margin-top: var(--space-4);
