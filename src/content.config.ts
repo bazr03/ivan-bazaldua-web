@@ -22,4 +22,21 @@ const proyectos = defineCollection({
     }),
 });
 
-export const collections = { proyectos };
+/**
+ * Artículos collection — blog posts in MDX format from
+ * src/content/articulos/. Posts are sorted by pubDate descending.
+ */
+const articulos = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/articulos" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    slug: z.string().optional(),
+    coverImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { proyectos, articulos };

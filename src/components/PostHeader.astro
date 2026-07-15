@@ -1,0 +1,132 @@
+---
+/**
+ * Post header — hero section for individual blog post pages.
+ * Displays title, date, description, optional cover image, and tags.
+ */
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  coverImage?: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, coverImage, tags = [] } = Astro.props;
+
+const dateFormatter = new Intl.DateTimeFormat("es-MX", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+const formattedDate = dateFormatter.format(pubDate);
+---
+
+<header class="post-header">
+  {
+    coverImage && (
+      <div class="post-header__cover">
+        <img
+          src={coverImage}
+          alt={`Imagen de portada: ${title}`}
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    )
+  }
+  <div class="container post-header__inner">
+    <nav class="breadcrumbs" aria-label="Ruta de navegación">
+      <a href="/articulos">Artículos</a>
+      <span aria-hidden="true">/</span>
+      <span>{title}</span>
+    </nav>
+    {
+      tags.length > 0 && (
+        <ul class="post-header__tags" aria-label="Etiquetas">
+          {tags.map((tag) => (
+            <li class="post-header__tag">{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+    <h1 class="post-header__title">{title}</h1>
+    <p class="post-header__description">{description}</p>
+    <time class="post-header__date" datetime={pubDate.toISOString()}>
+      {formattedDate}
+    </time>
+  </div>
+</header>
+
+<style>
+  .post-header {
+    background: var(--color-bg-soft);
+    padding-block: var(--space-16) var(--space-12);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .post-header__cover {
+    width: 100%;
+    max-height: 420px;
+    overflow: hidden;
+  }
+  .post-header__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .post-header__inner {
+    padding-top: var(--space-8);
+  }
+  .post-header__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+  .post-header__tag {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-electric);
+    border-radius: var(--radius-full);
+    font-family: var(--font-heading);
+    font-size: var(--text-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-white);
+  }
+  .post-header__title {
+    font-size: var(--text-h2);
+    margin-top: var(--space-2);
+    max-width: 20ch;
+  }
+  .post-header__description {
+    margin-top: var(--space-4);
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 65ch;
+  }
+  .post-header__date {
+    display: block;
+    margin-top: var(--space-4);
+    font-family: var(--font-heading);
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+  }
+  .breadcrumbs a {
+    color: var(--color-accent-text);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .breadcrumbs a:hover {
+    color: var(--color-accent-hover);
+  }
+</style>

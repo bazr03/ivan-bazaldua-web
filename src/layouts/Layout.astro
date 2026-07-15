@@ -92,10 +92,19 @@ const jsonLd = {
 // Breadcrumb for subpages
 const pathname = Astro.url.pathname;
 const showBreadcrumb = pathname !== "/";
+const isArticulos = pathname.startsWith("/articulos/") || pathname === "/articulos";
 const breadcrumbItems = [
   { name: "Inicio", item: site.url },
-  ...(pathname !== "/"
+  ...(pathname !== "/" && !isArticulos
     ? [{ name: pageTitle, item: canonical }]
+    : []),
+  ...(isArticulos
+    ? [
+        { name: "Artículos", item: new URL("/articulos", site.url).href },
+        ...(pathname !== "/articulos"
+          ? [{ name: pageTitle, item: canonical }]
+          : []),
+      ]
     : []),
 ];
 const breadcrumbJsonLd = showBreadcrumb
@@ -165,6 +174,9 @@ const breadcrumbJsonLd = showBreadcrumb
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <!-- RSS autodiscovery -->
+    <link rel="alternate" type="application/rss+xml" title="Artículos — Iván Bazaldúa" href="/articulos/rss.xml" />
 
     <script
       type="application/ld+json"

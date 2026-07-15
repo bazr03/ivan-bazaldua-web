@@ -1,0 +1,169 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import PostHeader from "../../components/PostHeader.astro";
+import Prose from "../../components/Prose.astro";
+import Button from "../../components/Button.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import { site } from "../../data/site.ts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("articulos", ({ data }) => !data.draft);
+  return posts.map((post) => {
+    const slug = post.data.slug ?? post.id;
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const slug = post.data.slug ?? post.id;
+
+const { Content } = await render(post);
+
+// All posts sorted by date for prev/next navigation
+const allPosts = (await getCollection("articulos", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const currentIndex = allPosts.findIndex((p) => (p.data.slug ?? p.id) === slug);
+const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const prevSlug = prevPost ? (prevPost.data.slug ?? prevPost.id) : null;
+const nextSlug = nextPost ? (nextPost.data.slug ?? nextPost.id) : null;
+
+// JSON-LD structured data for the article
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  image: post.data.coverImage
+    ? new URL(post.data.coverImage, site.url).href
+    : undefined,
+  datePublished: post.data.pubDate.toISOString(),
+  author: {
+    "@type": "Person",
+    name: site.name,
+    url: site.url,
+  },
+  publisher: {
+    "@type": "ProfessionalService",
+    name: "Iván Bazaldúa — Geofísica Aplicada",
+    url: site.url,
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": new URL(`/articulos/${slug}`, site.url).href,
+  },
+};
+---
+
+<Layout
+  title={`${post.data.title} — Iván Bazaldúa`}
+  description={post.data.description}
+  ogType="article"
+>
+  <PostHeader
+    title={post.data.title}
+    description={post.data.description}
+    pubDate={post.data.pubDate}
+    coverImage={post.data.coverImage}
+    tags={post.data.tags}
+  />
+
+  <section class="section">
+    <div class="container">
+      <Prose>
+        <Content />
+      </Prose>
+      <div class="post-nav">
+        <a href="/articulos" class="post-nav__back">
+          <span>←</span> Volver a artículos
+        </a>
+        <div class="post-nav__prev-next">
+          {prevSlug && (
+            <a href={`/articulos/${prevSlug}`} class="post-nav__link post-nav__link--prev">
+              <span>←</span> Anterior
+            </a>
+          )}
+          {nextSlug && (
+            <a href={`/articulos/${nextSlug}`} class="post-nav__link post-nav__link--next">
+              Siguiente <span>→</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    heading="¿Te fue útil este artículo?"
+    text="Si tienes un proyecto donde la geofísica pueda ayudar, escríbeme."
+    buttonLabel="Contactar"
+  />
+
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+</Layout>
+
+<style>
+  .post-nav {
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+  .post-nav__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-heading);
+    font-size: var(--text-small);
+    font-weight: var(--weight-heading-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .post-nav__back:hover {
+    color: var(--color-accent-hover);
+  }
+  .post-nav__back span {
+    transition: transform var(--transition-fast);
+  }
+  .post-nav__back:hover span {
+    transform: translateX(-4px);
+  }
+  .post-nav__prev-next {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+  .post-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-heading);
+    font-size: var(--text-small);
+    font-weight: var(--weight-heading-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .post-nav__link:hover {
+    color: var(--color-accent-hover);
+  }
+  .post-nav__link span {
+    transition: transform var(--transition-fast);
+  }
+  .post-nav__link--prev:hover span {
+    transform: translateX(-4px);
+  }
+  .post-nav__link--next:hover span {
+    transform: translateX(4px);
+  }
+</style>

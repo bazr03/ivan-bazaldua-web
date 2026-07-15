@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Prose — article typography styles
+   Applied via the Prose component wrapper for blog post content.
+   ========================================================================== */
+
+/* Additional global prose styles that extend beyond the component scope */
+.prose > * + * {
+  margin-top: 0;
+}
