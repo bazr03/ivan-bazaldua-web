@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import CtaBanner from "../components/CtaBanner.astro";
+import fotoPerfil from "../assets/img/ICBR_2.png";
 
 const education = [
   {
@@ -73,7 +75,7 @@ const skills = [
   <section class="section">
     <div class="container intro">
       <div class="intro__photo">
-        <img src="/img/ICBR_2.png" alt="Iván Bazaldúa" width="260" height="260" />
+        <Image src={fotoPerfil} alt="Iván Bazaldúa" width={260} height={260} />
       </div>
       <div class="intro__text">
         <p>

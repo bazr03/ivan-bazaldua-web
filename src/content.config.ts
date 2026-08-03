@@ -7,7 +7,7 @@ import { glob } from "astro/loaders";
  * no code changes needed.
  */
 const proyectos = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/proyectos" }),
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/proyectos" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),

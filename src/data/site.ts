@@ -16,6 +16,8 @@ export const site = {
     whatsapp: "528211021129",
     // Pretty format for display.
     phoneDisplay: "+52 821 102 1129",
+    // E.164 format for JSON-LD structured data (no spaces).
+    phoneSchema: "+528211021129",
   },
   sameAs: ["https://www.linkedin.com/in/ivanc-bazalduar/"],
 } as const;

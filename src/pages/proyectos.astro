@@ -4,39 +4,10 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 
-const caseStudies = [
-  {
-    title: "Estudio geofísico en ladera para orientar cimentaciones, cortes y drenaje",
-    sector: "Obra civil",
-    location: "Zona de ladera",
-    method: "Tomografía de Resistividad Eléctrica (TRE)",
-    pain:
-      "Riesgo de sobrecostos por cortes, excavación difícil, drenaje insuficiente o cambios de cimentación durante obra.",
-    objective:
-      "Reconocer cambios laterales y en profundidad antes de definir plataformas, cortes y cimentaciones.",
-    result:
-      "Definir dónde concentrar sondeos, revisar taludes y anticipar variaciones laterales antes de cortar o nivelar.",
-    href: "/proyectos/estudio-geofisico-ladera/",
-  },
-  {
-    title: "TRE para identificar humedad y suelos finos antes del diseño de cimentaciones",
-    sector: "Obra civil",
-    location: "Entorno urbano anonimizado",
-    method: "Tomografía de Resistividad Eléctrica (TRE)",
-    pain:
-      "Riesgo de asentamientos, expansión, drenaje deficiente, afectación en losas y costos de mantenimiento.",
-    objective:
-      "Identificar anomalías de humedad y condiciones relevantes para cimentaciones, losas y drenaje.",
-    result:
-      "Priorizar sondeos, ensayos y zonas de drenaje donde la humedad y los finos pueden cambiar el comportamiento del terreno.",
-    href: "/proyectos/estudio-geofisico-suelos-humedad/",
-  },
-];
-
 // Published projects only (draft: false), ordered.
 const projects = (await getCollection("proyectos", ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
-const hasProjects = projects.length > 0 || caseStudies.length > 0;
+const hasProjects = projects.length > 0;
 ---
 
 <Layout
@@ -101,26 +72,6 @@ const hasProjects = projects.length > 0 || caseStudies.length > 0;
       {
         hasProjects ? (
           <div class="project-grid">
-            {caseStudies.map((p) => (
-              <article class="project">
-                <div class="project__body">
-                  <span class="project__sector">{p.sector}</span>
-                  <h2 class="project__title">
-                    <a href={p.href}>{p.title}</a>
-                  </h2>
-                  <dl>
-                    <div><dt>Ubicación</dt><dd>{p.location}</dd></div>
-                    <div><dt>Riesgo a controlar</dt><dd>{p.pain}</dd></div>
-                    <div><dt>Método</dt><dd>{p.method}</dd></div>
-                    <div><dt>Objetivo</dt><dd>{p.objective}</dd></div>
-                    <div><dt>Decisión clave</dt><dd>{p.result}</dd></div>
-                  </dl>
-                  <Button href={p.href} variant="secondary" class="project__link">
-                    Ver caso de estudio
-                  </Button>
-                </div>
-              </article>
-            ))}
             {projects.map((p) => (
               <article class="project">
                 {p.data.image && (
@@ -130,13 +81,18 @@ const hasProjects = projects.length > 0 || caseStudies.length > 0;
                 )}
                 <div class="project__body">
                   <span class="project__sector">{p.data.sector}</span>
-                  <h2 class="project__title">{p.data.title}</h2>
+                  <h2 class="project__title">
+                    <a href={`/proyectos/${p.id}/`}>{p.data.title}</a>
+                  </h2>
                   <dl>
                     <div><dt>Ubicación</dt><dd>{p.data.location}</dd></div>
                     <div><dt>Método</dt><dd>{p.data.method}</dd></div>
                     <div><dt>Objetivo</dt><dd>{p.data.objective}</dd></div>
                     <div><dt>Resultado</dt><dd>{p.data.result}</dd></div>
                   </dl>
+                  <Button href={`/proyectos/${p.id}/`} variant="secondary" class="project__link">
+                    Ver caso de estudio
+                  </Button>
                 </div>
               </article>
             ))}
@@ -232,6 +188,13 @@ const hasProjects = projects.length > 0 || caseStudies.length > 0;
   .project__title {
     font-size: 1.5rem;
     margin-bottom: var(--space-4);
+  }
+  .project__title a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .project__title a:hover {
+    color: var(--color-accent-text);
   }
   .project dl div {
     padding-block: var(--space-2);

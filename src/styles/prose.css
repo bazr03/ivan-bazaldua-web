@@ -1,9 +1,5 @@
 /* ==========================================================================
    Prose — article typography styles
-   Applied via the Prose component wrapper for blog post content.
+   Spacing and typography are now handled entirely by the Prose.astro component
+   via explicit margin-bottom rules, avoiding fragile owl-selector overrides.
    ========================================================================== */
-
-/* Additional global prose styles that extend beyond the component scope */
-.prose > * + * {
-  margin-top: 0;
-}

@@ -34,7 +34,7 @@ const jsonLd = {
       logo: new URL("/favicon.svg", site.url).href,
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: site.contact.phoneDisplay,
+        telephone: site.contact.phoneSchema,
         email: site.contact.email,
         contactType: "customer service",
         availableLanguage: "Spanish",
@@ -48,7 +48,7 @@ const jsonLd = {
       jobTitle: "M.C. Geofísica Aplicada",
       url: site.url,
       email: `mailto:${site.contact.email}`,
-      telephone: site.contact.phoneDisplay,
+      telephone: site.contact.phoneSchema,
       sameAs: site.sameAs,
       knowsAbout: [
         "Geofísica aplicada",
@@ -76,7 +76,7 @@ const jsonLd = {
       name: "Iván Bazaldúa — Geofísica Aplicada",
       description: site.description,
       url: site.url,
-      telephone: site.contact.phoneDisplay,
+      telephone: site.contact.phoneSchema,
       email: `mailto:${site.contact.email}`,
       areaServed: "MX",
       serviceType: [

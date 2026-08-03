@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import CtaBanner from "../components/CtaBanner.astro";
+import fotoPerfil from "../assets/img/ICBR_2.png";
 
 const areas = [
   {
@@ -73,11 +75,11 @@ const steps = [
         </div>
       </div>
       <div class="hero__photo">
-        <img
-          src="/img/ICBR_2.png"
+        <Image
+          src={fotoPerfil}
           alt="Iván Bazaldúa"
-          width="340"
-          height="340"
+          width={340}
+          height={340}
           fetchpriority="high"
           decoding="async"
         />

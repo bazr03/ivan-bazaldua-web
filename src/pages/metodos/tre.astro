@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Prose from "../../components/Prose.astro";
 import Button from "../../components/Button.astro";
 import CtaBanner from "../../components/CtaBanner.astro";
 ---
@@ -42,7 +43,7 @@ import CtaBanner from "../../components/CtaBanner.astro";
 
   <section class="section">
     <div class="container container--narrow">
-      <div class="prose">
+      <Prose>
 
         <p>
           La <strong>Tomografía de Resistividad Eléctrica</strong>, también conocida como
@@ -211,7 +212,7 @@ import CtaBanner from "../../components/CtaBanner.astro";
           subterránea, estabilidad de taludes y evaluación ambiental.
         </p>
 
-      </div>
+      </Prose>
     </div>
   </section>
 
@@ -249,32 +250,6 @@ import CtaBanner from "../../components/CtaBanner.astro";
   }
   .container--narrow {
     max-width: 720px;
-  }
-  .prose {
-    line-height: 1.8;
-  }
-  .prose h2 {
-    margin-top: var(--space-12);
-    margin-bottom: var(--space-4);
-  }
-  .prose h3 {
-    margin-top: var(--space-8);
-    margin-bottom: var(--space-3);
-  }
-  .prose p {
-    margin-bottom: var(--space-4);
-    color: var(--text-secondary);
-  }
-  .prose ul {
-    margin-bottom: var(--space-4);
-    padding-left: var(--space-6);
-    color: var(--text-secondary);
-  }
-  .prose li {
-    margin-bottom: var(--space-2);
-  }
-  .prose strong {
-    color: var(--text-primary);
   }
   .formula {
     text-align: center;
