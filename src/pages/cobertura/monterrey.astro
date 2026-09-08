@@ -1,0 +1,703 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import { whatsappLink } from "../../data/site.ts";
+
+const whatsappHref = `${whatsappLink}?text=${encodeURIComponent(
+  "Hola Iván, necesito un estudio geofísico en Monterrey para Licencia de Construcción o Uso de Suelo.",
+)}`;
+
+const caracteristicasPdu = [
+  "Zona de pendientes del 15% hasta el 45%; en pendientes mayores al 45% no se permite la urbanización.",
+  "Estratigrafía del macizo rocoso compuesto por rocas sedimentarias.",
+  "Riesgos de desprendimiento de rocas o deslizamientos, especialmente en áreas desforestadas y en la vecindad de grandes cañadas.",
+  "Susceptibilidad a hundimientos de los suelos.",
+  "Antiguas zonas de extracción de materiales o pedreras.",
+  "Susceptibilidad a inundaciones o encharcamientos (cañadas, escurrimientos pluviales y planicies de inundación).",
+];
+
+const zonasGeograficas = [
+  "Cerro del Topo Chico y zonas circundantes (Topo Chico, Aztlán).",
+  "Cerro de la Silla y su zona de influencia (La Estanzuela, La Rioja, La Toscana, Las Estancias, Parque La Estanzuela).",
+  "Sierra Las Mitras.",
+  "Sierra Morena y fraccionamientos hacia Cañada Sur.",
+  "Cañón del Huajuco.",
+  "Zonas de ladera y montaña en general: Balcones, Carpinteros, El Uro, Los Cristales, El Barro, La Bola.",
+  "Distritos: Cumbres, Cumbres Pte., Cd. Solidaridad, Mitras Norte, Mitras Centro, Obispado, San Jerónimo.",
+];
+
+const metodos = [
+  {
+    nombre: "Sondeo Eléctrico Vertical (SEV)",
+    detalle:
+      "Método exigido por el PDU para antiguas pedreras. Evaluación vertical puntual de resistividad para mapear cambios de material y fallamientos.",
+  },
+  {
+    nombre: "Perfil Eléctrico (Trech o Dipole-Dipole)",
+    detalle:
+      "Método alternativo exigido por el PDU. Permite identificar variaciones laterales del subsuelo a profundidades controladas.",
+  },
+  {
+    nombre: "Tomografía de Resistividad Eléctrica (TRE/ERT)",
+    detalle:
+      "Para mapeo 2D del subsuelo cuando se requiere imagen más detallada que el SEV o el perfil aislado.",
+  },
+  {
+    nombre: "Tomografía de Refracción Sísmica (TRS)",
+    detalle:
+      "Para estimar velocidades sísmicas, profundidad a roca y estratificación en zonas de ladera.",
+  },
+  {
+    nombre: "MASW",
+    detalle:
+      "Para perfiles de velocidad de onda de corte (Vs) cuando el proyecto requiere clasificación dinámica del suelo.",
+  },
+];
+
+const pasosVerificar = [
+  {
+    titulo: "Ubicación",
+    texto:
+      "Revisa si tu dirección está cerca de las zonas geográficas listadas o en el Atlas de Riesgo para el Estado de Nuevo León.",
+  },
+  {
+    titulo: "Pendiente del terreno",
+    texto: "Si está en ladera con pendiente mayor al 15%, es candidato.",
+  },
+  {
+    titulo: "Historia del predio",
+    texto:
+      "Si fue cantera, banco de material, mina o relleno, es candidato seguro.",
+  },
+  {
+    titulo: "Síntomas",
+    texto:
+      "Si ya hiciste estudio de mecánica de suelos y mostró nivel freático somero, hundimientos o material heterogéneo, es candidato.",
+  },
+];
+
+const pasos = [
+  {
+    n: "01",
+    titulo: "Contacto y objetivo",
+    texto:
+      "Me cuentas el proyecto, ubicación y si ya tienes observaciones del municipio.",
+  },
+  {
+    n: "02",
+    titulo: "Propuesta y método",
+    texto:
+      "Defino el alcance (SEV, Perfil, TRE, etc.) y entrego cotización por escrito.",
+  },
+  {
+    n: "03",
+    titulo: "Trabajo de campo",
+    texto:
+      "Equipo portátil, no invasivo, sin excavación. Permiso y acceso coordinados contigo.",
+  },
+  {
+    n: "04",
+    titulo: "Informe y recomendaciones",
+    texto:
+      "Entregable con metodología, resultados interpretados, cumplimiento de sección 10.2.4 del PDU, limitaciones y recomendaciones de verificación cuando aplique.",
+  },
+];
+
+const diferenciadores = [
+  {
+    titulo: "M.C. en Geofísica Aplicada (CICESE)",
+    texto:
+      "Formación de posgrado en ciencias de la tierra, requisito explícito de la normatividad municipal para peritos en estudios geofísicos.",
+  },
+  {
+    titulo: "Dominio del método exigido por el PDU",
+    texto:
+      "Sondeos Eléctricos Verticales (SEV) y Perfiles Eléctricos con procesamiento en Res2DInv, ZondST2D y ResIPy.",
+  },
+  {
+    titulo: "Interpretación, no solo datos",
+    texto:
+      "Entrego conclusiones y recomendaciones accionables, no números sueltos.",
+  },
+  {
+    titulo: "Cobertura completa",
+    texto:
+      "Si tu caso requiere además TRS o MASW (clasificación sísmica del suelo), los integro en el mismo alcance.",
+  },
+];
+
+const faqs = [
+  {
+    pregunta: "¿Cuándo me van a exigir un Estudio Geofísico en Monterrey?",
+    respuesta:
+      "Cuando tu proyecto esté en una Zona Especial de Desarrollo según la sección 10.2.4 del PDU 2013-2025: pendientes del 15-45%, susceptibilidad a deslizamientos o hundimientos, antiguas pedreras, susceptibilidad a inundaciones o zonas señaladas en el Atlas de Riesgo del Estado.",
+  },
+  {
+    pregunta: "¿Qué método se exige para antiguas pedreras?",
+    respuesta:
+      "Sondeo Eléctrico Vertical (SEV) o Perfil Eléctrico, según lo que el PDU indica textualmente. Ambos métodos están en mi catálogo de servicios.",
+  },
+  {
+    pregunta: "¿Pueden entregar el informe rápido para no retrasar mi trámite?",
+    respuesta:
+      "El trabajo de campo se ejecuta típicamente en 1-2 jornadas. El procesamiento e informe final depende del alcance y la complejidad del caso. Conversamos el plazo según tu fecha límite.",
+  },
+  {
+    pregunta: "¿Cubre también el diseño de cimentación?",
+    respuesta:
+      "No. El estudio geofísico entrega parámetros del subsuelo que el ingeniero civil o estructural usa para el diseño. El diseño estructural es un alcance independiente.",
+  },
+  {
+    pregunta: "¿Cómo verifico si mi dirección está en zona de riesgo?",
+    respuesta:
+      "Consulta el Atlas de Riesgo para el Estado de Nuevo León en el portal del Gobierno del Estado o IMPLAN Monterrey. Si tu dirección está en zona de ladera, antiguo banco de material o cañada, es muy probable que aplique la exigencia.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Estudio geofísico para Zona Especial de Desarrollo en Monterrey",
+    provider: {
+      "@type": "Person",
+      name: "Iván Bazaldúa",
+      jobTitle: "M.C. en Geofísica Aplicada",
+      hasCredential: "Cédula profesional en ciencias de la tierra o carrera afín",
+    },
+    areaServed: { "@type": "City", name: "Monterrey, Nuevo León" },
+    description:
+      "Estudio geofísico no invasivo (SEV, Perfiles Eléctricos, TRE, TRS, MASW) para cumplimiento de la sección 10.2.4 del Plan de Desarrollo Urbano de Monterrey 2013-2025 en Zonas Especiales de Desarrollo.",
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "MXN",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.pregunta,
+      acceptedAnswer: { "@type": "Answer", text: f.respuesta },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Estudio geofísico en Monterrey, N.L. — SEV, Perfiles Eléctricos y TRE (PDU 2013-2025) | Iván Bazaldúa"
+  description="Estudio geofísico no invasivo en Monterrey: Sondeos Eléctricos Verticales (SEV), Perfiles Eléctricos y TRE para Licencia de Construcción y Uso de Suelo. Cumplimos con la sección 10.2.4 del PDU 2013-2025 para Zonas Especiales de Desarrollo."
+  ogType="article"
+>
+  <section class="section--soft page-head">
+    <div class="container">
+      <p class="eyebrow">Cobertura · Monterrey</p>
+      <h1>Estudio geofísico en Monterrey, N.L.</h1>
+      <p class="page-head__lead">
+        Para Licencia de Construcción y Uso de Suelo según el PDU 2013-2025,
+        sección 10.2.4.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p>
+        Si tu proyecto en Monterrey cae en una <strong>Zona Especial de
+        Desarrollo</strong> según el Plan de Desarrollo Urbano 2013-2025
+        (sección 10.2.4), el municipio puede exigirte un <strong>Estudio
+        Geofísico</strong> como parte de los requisitos para tu Licencia de
+        Construcción o Licencia de Uso de Suelo. Realizo Sondeos
+        Eléctricos Verticales (SEV), Perfiles Eléctricos y estudios
+        complementarios (TRE, TRS, MASW) que cumplen con lo que pide el PDU
+        y entregan interpretación accionable, no solo datos.
+      </p>
+      <p>
+        Atiendo a arquitectos independientes que necesitan certeza técnica
+        para avanzar su trámite sin retrasos y con un informe que responde
+        a lo que la autoridad espera.
+      </p>
+      <p class="cta-row">
+        <a class="cta-primary" href={whatsappHref}>
+          Evaluar mi proyecto en Monterrey por WhatsApp
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="cuando-lo-exige">
+    <div class="container">
+      <h2 id="cuando-lo-exige">Cuándo lo exige el PDU de Monterrey</h2>
+      <p>
+        El <strong>Plan de Desarrollo Urbano del Municipio de Monterrey
+        2013-2025</strong>, en su <strong>sección 10.2.4 "Zona Especial de
+        Desarrollo"</strong>, define las áreas, predios o inmuebles que
+        deben presentar estudios técnicos específicos antes de cualquier
+        intervención. La exigencia aplica a predios con alguna de estas
+        características:
+      </p>
+
+      <blockquote cite="https://implancmty.org/">
+        <p>
+          Serán consideradas como zonas especiales de desarrollo, además
+          de las señaladas en el Atlas de Riesgo para el Estado de Nuevo
+          León, las que presenten posibilidades de riesgo geológico ó
+          hidrológico, ubicadas en áreas urbanas y urbanizables, que
+          presenten alguna de las siguientes características:
+        </p>
+        <ul>
+          {
+            caracteristicasPdu.map((c) => (
+              <li>{c}</li>
+            ))
+          }
+        </ul>
+      </blockquote>
+
+      <p>
+        Y para el caso (e) — <strong>antiguas pedreras</strong> — el PDU es
+        explícito:
+      </p>
+
+      <blockquote cite="https://implancmty.org/">
+        <p>
+          En los predios que se encuentren ubicados en zonas de antiguas
+          pedreras, se deberá presentar, además un Estudio Geofísico, en
+          donde se deberán realizar Sondeos Eléctricos Verticales (SEV) o
+          un Perfil Eléctrico para evaluar las condiciones estructurales
+          del subsuelo donde se pretende desplantar el proyecto, así como
+          identificar los posibles cambios de material y fallamientos
+          producto del uso de explosivos para la extracción del material y
+          demás especificaciones que la Autoridad estime necesarios,
+          según las características del caso.
+        </p>
+      </blockquote>
+
+      <p class="cite">
+        <small>
+          <em>
+            Fuente: Plan de Desarrollo Urbano del Municipio de Monterrey
+            2013-2025, sección 10.2.4, IMPLAN Monterrey.
+          </em>
+        </small>
+      </p>
+
+      <p>
+        Si tu proyecto está en cualquiera de estos seis escenarios en
+        Monterrey, es altamente probable que el municipio te pida un
+        Estudio Geofísico como parte del expediente.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="zonas-cobertura">
+    <div class="container">
+      <h2 id="zonas-cobertura">
+        Zonas geográficas con presencia documentada de riesgo en Monterrey
+      </h2>
+      <p>
+        El PDU lista zonas geográficas con presencia documentada de riesgo
+        geológico o hidrológico. Si tu proyecto está cerca de alguna de
+        ellas, es prudente evaluar si aplica la exigencia:
+      </p>
+      <ul class="zone-list">
+        {
+          zonasGeograficas.map((z) => (
+            <li>{z}</li>
+          ))
+        }
+      </ul>
+      <p class="note">
+        <strong>Importante</strong>: la lista anterior es indicativa, no
+        exhaustiva. La clasificación oficial de zonas de Riesgo Alto o
+        Muy Alto está en el <a
+          href="https://www.nl.gob.mx/"
+          rel="noopener"
+          target="_blank"
+        >Atlas de Riesgo para el Estado de Nuevo León</a>, que es la
+        referencia normativa.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="casos-tipicos">
+    <div class="container">
+      <h2 id="casos-tipicos">Casos típicos en Monterrey</h2>
+      <p>
+        Los proyectos donde más frecuentemente aplica esta exigencia son:
+      </p>
+
+      <article class="case-card">
+        <h3>Caso 1 — Proyecto en ladera o pie de cerro con pendiente fuerte</h3>
+        <p>
+          Tu proyecto está en zona con pendiente del 15% al 45% (unidades
+          habitacionales en laderas de Mitras, Cumbres, Sierra Madre). El
+          municipio puede pedir estudios técnicos para asegurar la
+          factibilidad del desarrollo antes de autorizar el cambio de uso
+          de suelo o la licencia de construcción. La caracterización del
+          subsuelo mediante SEV o Perfiles Eléctricos ayuda a identificar
+          rellenos, susceptibilidad a deslizamientos o nivel freático
+          superficial.
+        </p>
+      </article>
+
+      <article class="case-card">
+        <h3>Caso 2 — Construcción sobre antiguo banco de material o pedrera</h3>
+        <p>
+          Tu terreno fue históricamente una zona de extracción de
+          materiales pétreos (antiguas pedreras, hoy dentro de la mancha
+          urbana o en su límite). El PDU es categórico: aquí se
+          <strong>debe</strong> presentar Estudio Geofísico. Los métodos
+          exigidos son Sondeos Eléctricos Verticales (SEV) o Perfil
+          Eléctrico, específicamente para evaluar las condiciones
+          estructurales del subsuelo donde se pretende desplantar el
+          proyecto, identificar cambios de material y fallamientos
+          producto del uso histórico de explosivos.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="que-cubrimos">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Servicios</p>
+        <h2>Qué cubrimos técnicamente</h2>
+      </div>
+      <p>
+        Cada proyecto en Monterrey se resuelve con uno o varios de estos
+        métodos, según el objetivo y el tipo de zona:
+      </p>
+      <ul class="methods">
+        {
+          metodos.map((m) => (
+            <li class="method">
+              <h3>{m.nombre}</h3>
+              <p>{m.detalle}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="note">
+        <strong>Importante</strong>: los métodos geofísicos son indirectos
+        y ayudan a reducir incertidumbre. No sustituyen a sondeos,
+        perforaciones o calicatas cuando el proyecto los requiere. El
+        informe lo declara explícitamente.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="verificar">
+    <div class="container">
+      <h2 id="verificar">Cómo verifico si tu proyecto aplica</h2>
+      <p>
+        Si no sabes si tu proyecto cae en Zona Especial de Desarrollo,
+        estos son los pasos:
+      </p>
+      <ol class="steps steps--small">
+        {
+          pasosVerificar.map((s, i) => (
+            <li class="step">
+              <span class="step__num">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{s.titulo}</h3>
+              <p>{s.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p>
+        Si tienes dudas, escríbeme y revisamos el caso sin compromiso.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="como-trabajamos">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Proceso</p>
+        <h2>Cómo trabajamos</h2>
+      </div>
+      <ol class="steps">
+        {
+          pasos.map((s) => (
+            <li class="step">
+              <span class="step__num">{s.n}</span>
+              <h3>{s.titulo}</h3>
+              <p>{s.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <hr class="wave-divider" />
+
+  <section class="section section--soft" aria-labelledby="por-que">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Por qué trabajar conmigo</p>
+        <h2>Rigor científico con enfoque municipal</h2>
+      </div>
+      <ul class="differentiators">
+        {
+          diferenciadores.map((d) => (
+            <li class="differentiator">
+              <h3>{d.titulo}</h3>
+              <p>{d.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">FAQ</p>
+        <h2>Preguntas frecuentes</h2>
+      </div>
+      <ul class="faqs">
+        {
+          faqs.map((f) => (
+            <li class="faq">
+              <details>
+                <summary>{f.pregunta}</summary>
+                <p>{f.respuesta}</p>
+              </details>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBanner heading="¿Tu proyecto en Monterrey puede caer en Zona Especial de Desarrollo según el PDU 2013-2025?" />
+</Layout>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(jsonLd)}
+/>
+
+<style>
+  .page-head__lead {
+    max-width: 60ch;
+    margin-top: var(--space-4);
+    font-size: 1.125rem;
+    color: var(--text-primary);
+  }
+
+  .cta-row {
+    margin-top: var(--space-6);
+  }
+  .cta-primary {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-electric);
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    text-transform: uppercase;
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+    transition: background var(--transition-base);
+  }
+  .cta-primary:hover {
+    background: var(--color-accent);
+  }
+
+  .section p + p {
+    margin-top: var(--space-4);
+  }
+  .section p {
+    max-width: 70ch;
+  }
+
+  .section__header {
+    margin-bottom: var(--space-6);
+  }
+
+  blockquote {
+    margin: var(--space-6) 0;
+    padding: var(--space-6);
+    background: var(--color-bg-soft);
+    border-left: 3px solid var(--color-electric);
+    border-radius: var(--radius-sm);
+    font-style: italic;
+    max-width: 70ch;
+  }
+  blockquote p + p {
+    margin-top: var(--space-3);
+  }
+  blockquote ul {
+    list-style: disc;
+    padding-left: var(--space-6);
+    margin-top: var(--space-3);
+  }
+  blockquote li + li {
+    margin-top: var(--space-2);
+  }
+
+  .cite {
+    margin-top: var(--space-3);
+    color: var(--text-secondary);
+  }
+
+  .note {
+    margin-top: var(--space-6);
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-bg-soft);
+    border-left: 3px solid var(--color-electric);
+    border-radius: var(--radius-sm);
+    max-width: 70ch;
+  }
+
+  .zone-list {
+    list-style: disc;
+    padding-left: var(--space-6);
+    margin-top: var(--space-4);
+    color: var(--text-primary);
+    max-width: 70ch;
+  }
+  .zone-list li + li {
+    margin-top: var(--space-2);
+  }
+
+  .case-card {
+    margin-top: var(--space-6);
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    max-width: 70ch;
+  }
+  .case-card h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  .methods,
+  .differentiators {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+  .methods {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .differentiators {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .method,
+  .differentiator,
+  .faq {
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .method h3,
+  .differentiator h3 {
+    margin-bottom: var(--space-2);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+    counter-reset: step;
+  }
+  .steps--small {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: var(--space-6);
+  }
+  .step {
+    padding: var(--space-6);
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+  }
+  .step__num {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-bold);
+    font-size: 2.5rem;
+    color: var(--color-accent-text);
+    line-height: 1;
+  }
+  .step h3 {
+    margin-block: var(--space-3) var(--space-2);
+    font-size: 1.25rem;
+  }
+  .step p {
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+  }
+
+  .faqs {
+    max-width: 800px;
+    margin-inline: auto;
+  }
+  .faq details {
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-4);
+  }
+  .faq summary {
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading-semibold);
+    font-size: 1.125rem;
+    list-style: none;
+    padding-right: var(--space-8);
+    position: relative;
+  }
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: var(--color-electric);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .faq details[open] summary::after {
+    content: "−";
+  }
+  .faq details p {
+    margin-top: var(--space-3);
+    color: var(--text-secondary);
+  }
+
+  .wave-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-electric),
+      transparent
+    );
+    margin-block: var(--space-12);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+    .steps--small {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
