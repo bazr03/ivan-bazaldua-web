@@ -28,6 +28,8 @@ const formattedDate = dateFormatter.format(pubDate);
         <img
           src={coverImage}
           alt={`Imagen de portada: ${title}`}
+          width="1200"
+          height="630"
           loading="eager"
           decoding="async"
         />
@@ -65,6 +67,7 @@ const formattedDate = dateFormatter.format(pubDate);
   }
   .post-header__cover {
     width: 100%;
+    aspect-ratio: 1200 / 630;
     max-height: 420px;
     overflow: hidden;
   }

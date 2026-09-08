@@ -34,7 +34,10 @@
 
   /* ----- Text roles ----- */
   --text-primary: var(--color-charcoal);
-  --text-secondary: var(--color-grey);
+  /* #6b7280 vs. white surfaces = 4.83:1, passes WCAG AA (4.5:1) for body
+     text. --color-grey (#9ca3af) only manages ~2.54:1 and stays reserved
+     for non-text uses (borders, decorative). */
+  --text-secondary: #6b7280;
   --text-on-dark: var(--color-white);
 
   /* Native form controls / scrollbars match the theme */

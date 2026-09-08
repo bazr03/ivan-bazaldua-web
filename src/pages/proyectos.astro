@@ -82,7 +82,7 @@ const hasProjects = projects.length > 0;
                 <div class="project__body">
                   <span class="project__sector">{p.data.sector}</span>
                   <h2 class="project__title">
-                    <a href={`/proyectos/${p.id}/`}>{p.data.title}</a>
+                    <a href={`/proyectos/${p.id}`}>{p.data.title}</a>
                   </h2>
                   <dl>
                     <div><dt>Ubicación</dt><dd>{p.data.location}</dd></div>
@@ -90,7 +90,7 @@ const hasProjects = projects.length > 0;
                     <div><dt>Objetivo</dt><dd>{p.data.objective}</dd></div>
                     <div><dt>Resultado</dt><dd>{p.data.result}</dd></div>
                   </dl>
-                  <Button href={`/proyectos/${p.id}/`} variant="secondary" class="project__link">
+                  <Button href={`/proyectos/${p.id}`} variant="secondary" class="project__link">
                     Ver caso de estudio
                   </Button>
                 </div>

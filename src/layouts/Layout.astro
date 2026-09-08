@@ -89,20 +89,22 @@ const jsonLd = {
   ],
 };
 
-// Breadcrumb for subpages
+// Breadcrumb for subpages — strip the " | site name" suffix so the
+// breadcrumb label stays short instead of repeating the full <title>.
 const pathname = Astro.url.pathname;
 const showBreadcrumb = pathname !== "/";
 const isArticulos = pathname.startsWith("/articulos/") || pathname === "/articulos";
+const breadcrumbLabel = pageTitle.split(" | ")[0];
 const breadcrumbItems = [
   { name: "Inicio", item: site.url },
   ...(pathname !== "/" && !isArticulos
-    ? [{ name: pageTitle, item: canonical }]
+    ? [{ name: breadcrumbLabel, item: canonical }]
     : []),
   ...(isArticulos
     ? [
         { name: "Artículos", item: new URL("/articulos", site.url).href },
         ...(pathname !== "/articulos"
-          ? [{ name: pageTitle, item: canonical }]
+          ? [{ name: breadcrumbLabel, item: canonical }]
           : []),
       ]
     : []),
